@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+
+# SQLite
+data/tamaraapply.db
+data/tamaraapply.db-wal
+data/tamaraapply.db-shm
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

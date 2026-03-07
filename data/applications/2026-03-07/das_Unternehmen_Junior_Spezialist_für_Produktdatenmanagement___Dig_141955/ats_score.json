@@ -1,0 +1,39 @@
+{
+  "score": 82,
+  "matchedKeywords": [
+    "PIM",
+    "Magento",
+    "Excel",
+    "HTML",
+    "SQL",
+    "Digitalisierung",
+    "IT‑Projekte",
+    "Content",
+    "Koordination",
+    "Agenturen",
+    "Deutsch",
+    "Englisch",
+    "Kommunikation",
+    "Analytisch",
+    "Kreativ",
+    "Marketing"
+  ],
+  "missingKeywords": [
+    "DAM",
+    "XML",
+    "JSON"
+  ],
+  "suggestions": [
+    "Füge konkrete Beispiele zu deiner Arbeit mit PIM‑Systemen (z. B. Namen der eingesetzten Tools) und, falls vorhanden, zu DAM‑Lösungen hinzu.",
+    "Beschreibe detaillierter deine Magento‑Erfahrung – z. B. Produktkatalog‑Pflege, Integration mit ERP oder Shop‑Optimierung.",
+    "Erweitere dein Profil um Kenntnisse in XML und JSON (z. B. durch Kurse oder praktische Projekte), da diese in der Stellenausschreibung gefordert werden.",
+    "Betone deine fortgeschrittenen Excel‑Fähigkeiten (Pivot‑Tabellen, Makros, Datenvisualisierung) im Skills‑Abschnitt.",
+    "Gib quantifizierbare Erfolge an (z. B. % Verbesserung der Datenqualität, Reduktion von Ticket‑Bearbeitungszeit), um die Relevanz deiner Erfahrung zu untermauern."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 24,
+    "experienceMatch": 22,
+    "keywordsMatch": 18
+  }
+}
