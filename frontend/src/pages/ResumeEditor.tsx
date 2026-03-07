@@ -7,7 +7,7 @@ import { useGroq } from '../hooks/useGroq';
 
 export default function ResumeEditor() {
   const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError } = useAppStore();
-  const { tailorResume, loading } = useGroq();
+  const { tailorResume, scoreBaseResume, loading } = useGroq();
   const [jobDescription, setJobDescription] = useState('');
   const [drawerOpen, setDrawerOpen] = useState(true);
 
@@ -15,6 +15,13 @@ export default function ResumeEditor() {
     if (!jobDescription.trim()) return;
     try {
       await tailorResume(jobDescription);
+    } catch { /* error handled by hook */ }
+  };
+
+  const handleScoreBase = async () => {
+    if (!jobDescription.trim()) return;
+    try {
+      await scoreBaseResume(jobDescription);
     } catch { /* error handled by hook */ }
   };
 
@@ -87,20 +94,26 @@ export default function ResumeEditor() {
             />
           </div>
 
-          <button
-            onClick={handleTailor}
-            disabled={loading || !jobDescription.trim()}
-            className="w-full py-2.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-brand-teal/90 disabled:opacity-50 transition flex items-center justify-center gap-2"
-          >
-            {loading ? (
-              <>
+          <div className="flex gap-2">
+            <button
+              onClick={handleScoreBase}
+              disabled={loading || !jobDescription.trim()}
+              className="flex-1 py-2.5 bg-brand-gold text-white font-semibold flex items-center justify-center gap-1 rounded-lg hover:bg-brand-gold/90 disabled:opacity-50 transition text-sm"
+            >
+              📊 Check Base ATS
+            </button>
+            <button
+              onClick={handleTailor}
+              disabled={loading || !jobDescription.trim()}
+              className="flex-1 py-2.5 bg-brand-teal text-white font-semibold flex items-center justify-center gap-1 rounded-lg hover:bg-brand-teal/90 disabled:opacity-50 transition text-sm"
+            >
+              {loading ? (
                 <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Tailoring...
-              </>
-            ) : (
-              '✨ Tailor Resume'
-            )}
-          </button>
+              ) : (
+                '✨ Tailor Resume'
+              )}
+            </button>
+          </div>
 
           {tailoringError && (
             <div className="bg-red-50 border border-red-200 rounded p-2 text-xs text-red-700">❌ {tailoringError}</div>
