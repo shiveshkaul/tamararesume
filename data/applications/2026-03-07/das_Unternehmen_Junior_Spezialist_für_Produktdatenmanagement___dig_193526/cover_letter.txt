@@ -1,0 +1,12 @@
+Sehr geehrte Damen und Herren,
+
+die ausgeschriebene Position des Junior‑Spezialisten für Produktdatenmanagement und digitale Lösungen bei der Leitz GmbH & Co. KG begeistert mich besonders, weil sie die Schnittstelle zwischen IT, Marketing und Produktentwicklung bildet – ein Umfeld, in dem ich meine Leidenschaft für strukturierte Datenpflege und die Optimierung digitaler Prozesse optimal einbringen kann. Die Möglichkeit, an der Weiterentwicklung von PIM‑ und Magento‑Systemen mitzuwirken und gleichzeitig Digitalisierungsprojekte im internationalen Kontext zu koordinieren, entspricht exakt meinem beruflichen Ziel, innovative IT‑Lösungen zur Steigerung der Datenqualität und Kundenzufriedenheit zu realisieren.
+
+In meiner derzeitigen Tätigkeit bei der Xentasystems GmbH unterstütze ich ein internationales Anwaltsunternehmen im 1st‑Level‑Support und bin für die Administration von MS‑365, SharePoint und SAP ERP verantwortlich. Dabei habe ich umfangreiche Erfahrung mit der Pflege und Qualitätssicherung von Produkt‑ und Kundendaten, dem Export/Import mittels SQL‑Abfragen sowie der Implementierung automatisierter Workflows über n8n. Die tägliche Nutzung von JIRA für Ticket‑Management, die Integration von REST‑APIs in Marketing‑Tools und die Verwaltung von Microsoft Entra ID, MFA/PIM und MDM zeigen meine Fähigkeit, komplexe digitale Systeme sicher zu betreiben. Zusätzlich habe ich mehrere Digitalisierungsprojekte im Marketingumfeld koordiniert, wobei ich als zentrale Schnittstelle zwischen internen Fachbereichen und externen Agenturen fungierte. Meine sehr guten Excel‑Kenntnisse, Grundkenntnisse in HTML, XML, JSON und meine zertifizierten Weiterbildungen in SQL, Power BI und Prompt Engineering runden das Profil ab und passen exakt zu den geforderten Qualifikationen.
+
+Ich bin hoch motiviert, meine analytischen und kreativen Fähigkeiten bei Leitz einzubringen und die digitale Produktdatenlandschaft gemeinsam mit Ihrem Team weiterzuentwickeln. Ich stehe ab sofort zur Verfügung und freue mich darauf, Sie in einem persönlichen Gespräch von meinem Engagement und meiner Eignung zu überzeugen.
+
+Mit freundlichen Grüßen,
+Tamara Steer
+tamarasteer019@gmail.com
+016094764310

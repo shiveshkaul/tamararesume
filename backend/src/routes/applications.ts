@@ -82,6 +82,26 @@ router.patch('/:id', (req: Request, res: Response) => {
   }
 });
 
+// DELETE /api/applications/:id
+router.delete('/:id', (req: Request, res: Response) => {
+  try {
+    const appId = req.params.id;
+    // Delete associated tailored resumes first (foreign key constraint)
+    db.prepare('DELETE FROM tailored_resumes WHERE application_id = ?').run(appId);
+    
+    // Delete the application
+    const info = db.prepare('DELETE FROM applications WHERE id = ?').run(appId);
+    
+    if (info.changes === 0) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    res.json({ success: true, message: 'Application deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+});
+
 // GET /api/applications/:id/folder
 router.get('/:id/folder', (req: Request, res: Response) => {
   try {

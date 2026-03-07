@@ -1,0 +1,37 @@
+{
+  "score": 75,
+  "matchedKeywords": [
+    "PIM",
+    "Excel",
+    "HTML",
+    "SQL",
+    "digital projects",
+    "coordination",
+    "quality checks",
+    "German",
+    "English",
+    "self‑structured",
+    "content",
+    "marketing",
+    "E‑Commerce"
+  ],
+  "missingKeywords": [
+    "DAM",
+    "Magento",
+    "XML",
+    "JSON"
+  ],
+  "suggestions": [
+    "Add explicit references to experience with PIM and DAM platforms (e.g., Akeneo, Salsify) and Magento to match core JD requirements.",
+    "Highlight any work with XML and JSON data formats, even if only basic, to cover the listed technical skills.",
+    "Include concrete examples of content creation for web or marketing channels, showing editorial responsibilities.",
+    "Detail measurable outcomes from digital/E‑Commerce projects (e.g., % improvement in data quality or workflow efficiency).",
+    "Incorporate the missing keywords (DAM, Magento, XML, JSON) into bullet points or a skills section to improve keyword matching."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 20,
+    "experienceMatch": 24,
+    "keywordsMatch": 13
+  }
+}

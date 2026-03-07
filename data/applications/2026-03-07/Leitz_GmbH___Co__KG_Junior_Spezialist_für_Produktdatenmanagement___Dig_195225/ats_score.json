@@ -1,0 +1,40 @@
+{
+  "score": 94,
+  "matchedKeywords": [
+    "PIM",
+    "DAM",
+    "Magento",
+    "Datenqualität",
+    "Digitalisierung",
+    "IT‑Projekte",
+    "Marketing",
+    "Content",
+    "Excel",
+    "HTML",
+    "XML",
+    "JSON",
+    "SQL",
+    "Deutsch",
+    "Englisch",
+    "Kommunikation",
+    "Team",
+    "Projektkoordination"
+  ],
+  "missingKeywords": [
+    "externe Agenturen",
+    "Content‑Erstellung"
+  ],
+  "suggestions": [
+    "Füge einen konkreten Hinweis zu deiner Magento‑Erfahrung hinzu (z. B. \"Betreuung und Weiterentwicklung des Magento‑Shops\").",
+    "Erwähne explizit die Zusammenarbeit bzw. Koordination mit externen Agenturen oder Dienstleistern.",
+    "Betone deine Aufgaben in der Content‑Erstellung, z. B. das Verfassen und Pflegen von Produktbeschreibungen für die Unternehmenswebseite.",
+    "Liste Excel als eigenständige Fähigkeit im Skills‑Abschnitt auf, um die Anforderung klar zu erfüllen.",
+    "Falls vorhanden, ergänze Angaben zu einer einschlägigen Ausbildung (z. B. Wirtschaftsinformatik) oder relevante Zertifikate."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 30,
+    "experienceMatch": 27,
+    "keywordsMatch": 19
+  }
+}

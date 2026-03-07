@@ -2,6 +2,8 @@ import { ATSResult } from '../types';
 
 interface Props {
   atsResult: ATSResult | null;
+  onPushSuggestions?: (suggestions: string[]) => Promise<void>;
+  loading?: boolean;
 }
 
 function ScoreArc({ score }: { score: number }) {
@@ -41,7 +43,7 @@ function BreakdownBar({ label, value }: { label: string; value: number }) {
   );
 }
 
-export default function ATSScorePanel({ atsResult }: Props) {
+export default function ATSScorePanel({ atsResult, onPushSuggestions, loading }: Props) {
   if (!atsResult) return null;
 
   return (
@@ -81,9 +83,22 @@ export default function ATSScorePanel({ atsResult }: Props) {
       {atsResult.suggestions.length > 0 && (
         <div className="mt-3">
           <h4 className="text-xs font-semibold text-brand-teal mb-1">💡 Suggestions</h4>
-          <ul className="text-xs text-gray-600 space-y-1">
+          <ul className="text-xs text-gray-600 space-y-1 mb-2">
             {atsResult.suggestions.map((s, i) => <li key={i}>• {s}</li>)}
           </ul>
+          {onPushSuggestions && (
+            <button
+              onClick={() => onPushSuggestions(atsResult.suggestions)}
+              disabled={loading}
+              className="w-full py-1.5 bg-brand-gold/10 text-brand-gold border border-brand-gold/30 font-semibold rounded hover:bg-brand-gold/20 transition text-xs flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {loading ? (
+                <span className="w-3 h-3 border-2 border-brand-gold/30 border-t-brand-gold rounded-full animate-spin" />
+              ) : (
+                '🔄 Apply Suggestions to Resume'
+              )}
+            </button>
+          )}
         </div>
       )}
     </div>

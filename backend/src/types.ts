@@ -20,6 +20,8 @@ export interface ResumeData {
   jobs: BaseJob[];
   certifications: Certification[];
   skills: string[];
+  achievements: string[];
+  awards: string[];
 }
 
 export interface TailoredResumeData extends ResumeData {
@@ -163,6 +165,8 @@ export const BASE_RESUME: ResumeData = {
     }
   ],
   certifications: [],
+  achievements: [],
+  awards: [],
   skills: [
     'MS365', 'SharePoint', 'SAP ERP', 'Datev',
     'Microsoft Entra ID (Azure AD)', 'MFA/PIM', 'Mobile Device Management',

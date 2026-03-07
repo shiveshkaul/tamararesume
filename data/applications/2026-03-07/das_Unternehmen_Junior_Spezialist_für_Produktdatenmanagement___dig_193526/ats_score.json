@@ -1,0 +1,36 @@
+{
+  "score": 78,
+  "matchedKeywords": [
+    "PIM",
+    "Magento",
+    "Excel",
+    "HTML",
+    "SQL",
+    "REST APIs",
+    "Digitalisierung",
+    "Projektkoordination",
+    "Qualitäts‑Checks",
+    "E‑Commerce",
+    "Produktdatenmanagement"
+  ],
+  "missingKeywords": [
+    "DAM",
+    "XML",
+    "JSON",
+    "Content‑Erstellung",
+    "Marketing‑Erfahrung"
+  ],
+  "suggestions": [
+    "Füge explizit Erfahrung mit DAM‑Systemen (z. B. Akeneo, Bynder) in den Bullet‑Points oder im Skills‑Abschnitt hinzu.",
+    "Erwähne Kenntnisse in XML und JSON, z. B. durch Beispiele von Datenimport‑/export‑Skripten.",
+    "Betone konkrete Content‑Erstellungs‑Aufgaben (Texte, Bild‑/Video‑Aufbereitung) für Marketing‑Kanäle.",
+    "Hebe deine Englischkenntnisse hervor, z. B. durch Zertifikate oder internationale Projektarbeit.",
+    "Ergänze ein kurzes Stichwort zu deiner Erfahrung mit PIM‑Systemen (z. B. „Arbeit mit PIM‑Tool X“)."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 21,
+    "experienceMatch": 24,
+    "keywordsMatch": 15
+  }
+}

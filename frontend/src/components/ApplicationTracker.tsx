@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import API from '../api';
 import { ApplicationRow } from '../types';
+import { useAppStore } from '../store/appStore';
 
 const statusColors: Record<string, string> = {
   draft: 'bg-gray-100 text-gray-500',
@@ -16,6 +18,9 @@ export default function ApplicationTracker() {
   const [apps, setApps] = useState<ApplicationRow[]>([]);
   const [total, setTotal] = useState(0);
   const [statusFilter, setStatusFilter] = useState('');
+  
+  const navigate = useNavigate();
+  const store = useAppStore();
 
   const fetchApps = async () => {
     try {
@@ -32,6 +37,43 @@ export default function ApplicationTracker() {
       await API.patch(`/applications/${id}`, { status });
       fetchApps();
     } catch (err) { console.error(err); }
+  };
+
+  const handleDeleteApp = async (id: number) => {
+    if (!window.confirm('Are you sure you want to delete this application? This cannot be undone.')) return;
+    try {
+      await API.delete(`/applications/${id}`);
+      fetchApps();
+    } catch (err) {
+      console.error('Failed to delete application:', err);
+      alert('Failed to delete application.');
+    }
+  };
+
+  const handleOpenApp = async (app: ApplicationRow) => {
+    try {
+      const res = await API.get(`/resume/${app.id}`);
+      store.setTailoredResume(res.data.resumeData);
+      store.setCoverLetter(res.data.coverLetter);
+      store.setActiveJobDetails({ title: app.job_title || 'Unknown Role', company: app.job_company || 'Unknown Company', id: app.job_id });
+      
+      if (res.data.jobDescription) {
+        store.setJobDescription(res.data.jobDescription);
+      } else {
+        store.setJobDescription(app.job_title ? `Role: ${app.job_title}\nCompany: ${app.job_company || ''}` : '');
+      }
+
+      if (res.data.atsResult) {
+        store.setAtsResult(res.data.atsResult);
+      } else {
+        store.setAtsResult(null);
+      }
+      
+      navigate('/editor');
+    } catch (err) {
+      console.error('Failed to load application data:', err);
+      alert('Failed to load application data. See console for details.');
+    }
   };
 
   const avgAts = apps.length > 0
@@ -130,10 +172,22 @@ export default function ApplicationTracker() {
                   </select>
                   {app.job_url && (
                     <a href={app.job_url} target="_blank" rel="noopener noreferrer"
-                      className="ml-2 text-brand-teal hover:underline">
-                      ↗ View
+                      className="ml-2 text-brand-teal hover:underline inline-block">
+                      ↗ View Job
                     </a>
                   )}
+                  <button
+                    onClick={() => handleOpenApp(app)}
+                    className="ml-2 px-2 py-0.5 bg-brand-teal text-white rounded hover:bg-brand-teal/90 transition text-[10px]"
+                  >
+                    Open in Editor
+                  </button>
+                  <button
+                    onClick={() => handleDeleteApp(app.id)}
+                    className="ml-2 px-2 py-0.5 bg-red-100 text-red-600 rounded hover:bg-red-200 transition text-[10px]"
+                  >
+                    🗑️ Delete
+                  </button>
                 </td>
               </tr>
             ))}

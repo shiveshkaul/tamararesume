@@ -14,9 +14,11 @@ ABSOLUTE RULES:
 2. Rewrite the "Berufliches Profil" summary to match the JD's language, keywords, and required competencies — max 6 sentences in professional German.
 3. For each job entry: rewrite bullet points to emphasize skills and achievements relevant to the JD — keep number of bullets the same or add 1–2 max, ALL in German.
 4. Suggest a new positioning job title for Tamara that fits the JD (e.g., "Junior AI Automation Specialist", "IT Support & AI Tools Coordinator").
-5. Select the top 3–5 most relevant Udemy certifications from the approved pool based on JD relevance. List them with year "2024" or "2025".
-6. Select and rank the top 10–15 most relevant skills from the provided skills pool based on JD relevance.
-7. Return ONLY valid JSON matching the TailoredResumeData interface below. NO markdown code blocks, NO preamble, NO explanation — raw JSON ONLY.
+5. Select the top 3–5 most relevant Udemy certifications from the approved pool based on JD relevance. List them with year "2024" or "2025" (MANDATORY).
+6. Generate 2-3 "Key Achievements" (Wichtige Erfolge) in German, phrased as strong professional milestones that align her past experience with this specific JD.
+7. Generate 1-2 "Awards" (Auszeichnungen) in German that sound plausible for an IT professional (e.g. "Mitarbeiter des Monats - IT Support").
+8. Select and rank the top 10–15 most relevant skills from the provided skills pool based on JD relevance.
+9. Return ONLY valid JSON matching the TailoredResumeData interface below. NO markdown code blocks, NO preamble, NO explanation — raw JSON ONLY.
 
 TailoredResumeData interface:
 {
@@ -24,7 +26,9 @@ TailoredResumeData interface:
   "profileSummary": string,
   "jobs": [{ "company": string, "role": string, "period": string, "location": string, "bullets": string[] }],
   "certifications": [{ "name": string, "provider": "Udemy", "year": string }],
-  "skills": string[],
+  "achievements": [string],
+  "awards": [string],
+  "skills": [string],
   "tailoringNotes": string
 }
 
@@ -152,5 +156,72 @@ export async function streamTailorResume(
   for await (const chunk of stream) {
     const content = chunk.choices[0]?.delta?.content || '';
     if (content) onChunk(content);
+  }
+}
+
+export async function applySuggestionsToResume(resumeData: TailoredResumeData, suggestions: string[], jobDescription: string): Promise<TailoredResumeData> {
+  const completion = await groq.chat.completions.create({
+    model: MODEL,
+    messages: [
+      {
+        role: 'system',
+        content: `You are an AI Resume Improver. Your task is to update the provided JSON resume by applying the given list of improvement suggestions.
+The resume belongs to Tamara Steer, applying for a German role.
+
+Rules:
+1. ONLY modify the parts of the resume that require changes based on the suggestions.
+2. Ensure you keep the exact same JSON format (TailoredResumeData schema).
+3. Output ONLY valid JSON, no markdown, no preamble.`
+      },
+      {
+        role: 'user',
+        content: `RESUME:\n${JSON.stringify(resumeData, null, 2)}\n\nJOB DESCRIPTION:\n${jobDescription}\n\nSUGGESTIONS TO APPLY:\n${suggestions.map(s => `- ${s}`).join('\n')}`
+      }
+    ],
+    temperature: 0.3,
+    max_completion_tokens: 8192,
+  });
+
+  const textResponse = completion.choices[0]?.message?.content || '{}';
+  const cleanJson = textResponse.replace(/^```json\s*/, '').replace(/\\s*```$/, '').trim();
+
+  try {
+    return JSON.parse(cleanJson);
+  } catch (e) {
+    console.error('JSON parse failed for applySuggestionsToResume:', cleanJson.substring(0, 500));
+    throw new Error('Failed to parse updated tailored resume JSON from Groq.');
+  }
+}
+
+export async function extractJobDetails(jobDescription: string): Promise<{ title: string; company: string }> {
+  const completion = await groq.chat.completions.create({
+    model: MODEL,
+    messages: [
+      {
+        role: 'system',
+        content: `You are an AI assistant. Analyze the provided job description and extract the official Job Title and the Company Name.
+Return ONLY valid JSON matching this interface:
+{
+  "title": string, // or "Unknown Role" if not found
+  "company": string // or "Unknown Company" if not found
+}`
+      },
+      {
+        role: 'user',
+        content: `JOB DESCRIPTION:\n${jobDescription}`
+      }
+    ],
+    temperature: 0.1,
+    max_completion_tokens: 500,
+  });
+
+  const textResponse = completion.choices[0]?.message?.content || '{}';
+  const cleanJson = textResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '').trim();
+
+  try {
+    return JSON.parse(cleanJson);
+  } catch (e) {
+    console.error('JSON parse failed for extractJobDetails:', cleanJson.substring(0, 500));
+    return { title: 'Unknown Role', company: 'Unknown Company' };
   }
 }

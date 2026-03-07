@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import ResumeCanvas from '../components/ResumeCanvas';
+import CoverLetterCanvas from '../components/CoverLetterCanvas';
 import ATSScorePanel from '../components/ATSScorePanel';
-import CoverLetterPanel from '../components/CoverLetterPanel';
 import { useAppStore } from '../store/appStore';
 import { useGroq } from '../hooks/useGroq';
 
 export default function ResumeEditor() {
-  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError, tailoredResume } = useAppStore();
-  const { tailorResume, scoreBaseResume, loading } = useGroq();
-  const [jobDescription, setJobDescription] = useState('');
+  const store = useAppStore();
+  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError, tailoredResume, jobDescription, setJobDescription, activeJobDetails } = store;
+  const { tailorResume, scoreBaseResume, pushSuggestions, loading } = useGroq();
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [activeTab, setActiveTab] = useState<'resume' | 'coverLetter'>('resume');
 
   const handleTailor = async () => {
     if (!jobDescription.trim()) return;
@@ -26,19 +27,39 @@ export default function ResumeEditor() {
   };
 
   const handleDownloadPdf = async () => {
-    const element = document.getElementById('resume-canvas');
+    const targetId = activeTab === 'resume' ? 'resume-canvas' : 'cover-letter-canvas';
+    const element = document.getElementById(targetId);
     if (!element) return;
     try {
-      const html2pdf = (await import('html2pdf.js')).default;
-      html2pdf().set({
-        margin: 0,
-        filename: `Tamara_Steer_CV_${new Date().toISOString().split('T')[0]}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(element).save();
+      const { default: API } = await import('../api');
+      
+      const clone = element.cloneNode(true) as HTMLElement;
+      clone.style.transform = 'none';
+      clone.style.boxShadow = 'none';
+      
+      const response = await API.post('/resume/generate-pdf', { 
+        htmlBody: clone.outerHTML 
+      }, { 
+        responseType: 'blob' 
+      });
+      
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      let fileName = `Tamara_Steer_CV_${new Date().toISOString().split('T')[0]}.pdf`;
+      if (activeJobDetails) {
+        const titleSafe = activeJobDetails.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+        const companySafe = activeJobDetails.company.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+        fileName = `Tamara_Steer_CV_${companySafe}_${titleSafe}.pdf`;
+      }
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error('PDF Error:', err);
+      alert('PDF generation failed. Check console for details.');
     }
   };
 
@@ -47,7 +68,24 @@ export default function ResumeEditor() {
       {/* Canvas */}
       <div className="flex-1 flex flex-col">
         <div className="flex items-center gap-2 mb-3">
-          <h1 className="text-lg font-bold text-brand-teal flex-1">Resume Editor</h1>
+          <h1 className="text-lg font-bold text-brand-teal mr-4">Resume Editor</h1>
+          
+          <div className="flex bg-gray-100 p-1 rounded-lg">
+            <button
+              onClick={() => setActiveTab('resume')}
+              className={`px-4 py-1.5 text-xs font-semibold rounded-md transition ${activeTab === 'resume' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              📄 Resume
+            </button>
+            <button
+              onClick={() => setActiveTab('coverLetter')}
+              className={`px-4 py-1.5 text-xs font-semibold rounded-md transition ${activeTab === 'coverLetter' ? 'bg-white shadow text-brand-teal' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              📝 Cover Letter
+            </button>
+          </div>
+
+          <div className="flex-1" />
           <button
             onClick={() => setEditMode(!isEditMode)}
             className={`px-3 py-1.5 text-xs font-semibold rounded transition ${isEditMode ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
@@ -70,7 +108,11 @@ export default function ResumeEditor() {
 
         <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-6 flex justify-center items-start">
           <div style={{ minWidth: 794 * 0.85, minHeight: 1123 * 0.85, flexShrink: 0 }}>
-            <ResumeCanvas scale={0.85} />
+            {activeTab === 'resume' ? (
+              <ResumeCanvas scale={0.85} />
+            ) : (
+              <CoverLetterCanvas scale={0.85} />
+            )}
           </div>
         </div>
       </div>
@@ -82,6 +124,14 @@ export default function ResumeEditor() {
             <h2 className="font-bold text-brand-teal">AI Tailor Panel</h2>
             <button onClick={() => setDrawerOpen(false)} className="text-gray-400 hover:text-gray-600 text-sm">✕</button>
           </div>
+
+          {activeJobDetails && (
+            <div className="bg-brand-teal/5 border border-brand-teal/20 rounded-lg p-3">
+              <p className="text-[10px] uppercase font-bold text-brand-teal mb-1">Target Role Recognized</p>
+              <h3 className="text-sm font-bold text-brand-slate leading-tight">{activeJobDetails.title}</h3>
+              <p className="text-xs text-gray-600 font-medium">{activeJobDetails.company}</p>
+            </div>
+          )}
 
           <div>
             <label className="text-xs font-semibold text-gray-600 block mb-1">Paste Job Description</label>
@@ -119,8 +169,16 @@ export default function ResumeEditor() {
             <div className="bg-red-50 border border-red-200 rounded p-2 text-xs text-red-700">❌ {tailoringError}</div>
           )}
 
-          <ATSScorePanel atsResult={atsResult} />
-          <CoverLetterPanel />
+          <ATSScorePanel 
+            atsResult={atsResult} 
+            onPushSuggestions={async (suggestions) => {
+              if (!jobDescription.trim()) return;
+              try {
+                await pushSuggestions(suggestions, jobDescription);
+              } catch { /* error handled by hook */ }
+            }}
+            loading={loading}
+          />
 
           {atsResult && (
             tailoredResume ? (

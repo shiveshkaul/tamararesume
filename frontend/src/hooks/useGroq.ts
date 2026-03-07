@@ -15,10 +15,11 @@ export function useGroq() {
 
     try {
       const response = await API.post('/resume/tailor', { jobDescription, jobId });
-      const { tailoredResume, atsResult, coverLetter } = response.data;
+      const { tailoredResume, atsResult, coverLetter, processedJob } = response.data;
       store.setTailoredResume(tailoredResume);
       store.setAtsResult(atsResult);
       store.setCoverLetter(coverLetter);
+      if (processedJob) store.setActiveJobDetails(processedJob);
       return response.data;
     } catch (err: any) {
       const msg = err.response?.data?.error || err.message || 'Tailoring failed';
@@ -51,6 +52,9 @@ export function useGroq() {
     try {
       const response = await API.post('/ats/score', { jobDescription, jobId, resumeData: store.resumeData });
       store.setAtsResult(response.data);
+      if (response.data.processedJob) {
+        store.setActiveJobDetails(response.data.processedJob);
+      }
       return response.data;
     } catch (err: any) {
       setError(err.response?.data?.error || err.message);
@@ -60,5 +64,30 @@ export function useGroq() {
     }
   }, [store]);
 
-  return { tailorResume, generateCoverLetter, scoreBaseResume, loading, error };
+  const pushSuggestions = useCallback(async (suggestions: string[], jobDescription: string) => {
+    setLoading(true);
+    setError(null);
+    store.setIsTailoring(true);
+    store.setTailoringError(null);
+    try {
+      const response = await API.post('/resume/apply-suggestions', {
+        resumeData: store.tailoredResume || store.resumeData,
+        suggestions,
+        jobDescription
+      });
+      store.setTailoredResume(response.data.tailoredResume);
+      store.setAtsResult(response.data.atsResult);
+      return response.data;
+    } catch (err: any) {
+      const msg = err.response?.data?.error || err.message || 'Push suggestions failed';
+      setError(msg);
+      store.setTailoringError(msg);
+      throw err;
+    } finally {
+      setLoading(false);
+      store.setIsTailoring(false);
+    }
+  }, [store]);
+
+  return { tailorResume, generateCoverLetter, scoreBaseResume, pushSuggestions, loading, error };
 }

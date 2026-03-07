@@ -7,23 +7,42 @@ import ModeToggle from '../components/ModeToggle';
 import { useAppStore, BASE_RESUME } from '../store/appStore';
 
 export default function Dashboard() {
-  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume } = useAppStore();
+  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails } = useAppStore();
   const [showPanel, setShowPanel] = useState(false);
 
   const handleDownloadPdf = async () => {
     const element = document.getElementById('resume-canvas');
     if (!element) return;
     try {
-      const html2pdf = (await import('html2pdf.js')).default;
-      html2pdf().set({
-        margin: 0,
-        filename: `Tamara_Steer_CV_${new Date().toISOString().split('T')[0]}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(element).save();
+      const { default: API } = await import('../api');
+      
+      const clone = element.cloneNode(true) as HTMLElement;
+      clone.style.transform = 'none';
+      clone.style.boxShadow = 'none';
+      
+      const response = await API.post('/resume/generate-pdf', { 
+        htmlBody: clone.outerHTML 
+      }, { 
+        responseType: 'blob' 
+      });
+      
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      let fileName = `Tamara_Steer_CV_${new Date().toISOString().split('T')[0]}.pdf`;
+      if (activeJobDetails) {
+        const titleSafe = activeJobDetails.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+        const companySafe = activeJobDetails.company.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+        fileName = `Tamara_Steer_CV_${companySafe}_${titleSafe}.pdf`;
+      }
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error('PDF generation failed:', err);
+      alert('PDF generation failed. Check console for details.');
     }
   };
 

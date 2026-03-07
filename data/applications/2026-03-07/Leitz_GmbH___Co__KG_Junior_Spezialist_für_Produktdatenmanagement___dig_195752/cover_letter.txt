@@ -1,0 +1,12 @@
+Sehr geehrte Damen und Herren,
+
+die Möglichkeit, bei Leitz GmbH & Co. KG als Junior‑Spezialist für Produktdatenmanagement und digitale Lösungen mitzuwirken, begeistert mich besonders, weil das Unternehmen als weltweit führender Hersteller von Präzisionswerkzeugen höchste Ansprüche an Datenqualität und digitale Prozessoptimierung stellt. Die Kombination aus innovativen Marketingsystemen (PIM, DAM, Magento) und einem internationalen Umfeld entspricht exakt meinem Wunsch, meine IT‑ und Analysekompetenzen gezielt im Marketing‑ und E‑Commerce‑Bereich weiterzuentwickeln und damit die digitale Wettbewerbsfähigkeit eines Traditionsunternehmens zu stärken.
+
+In meiner derzeitigen Position bei Xentasystems GmbH bin ich verantwortlich für die Administration von MS 365, SharePoint und SAP ERP sowie für die Durchführung von Daten‑Exports und Qualitäts‑Checks mittels SQL‑Abfragen. Durch die Koordination von Ticket‑Workflows in JIRA/ServiceNow und die Automatisierung von Benachrichtigungen mit n8n konnte ich die durchschnittliche Bearbeitungszeit um 20 % reduzieren. Meine Erfahrung in der Integration von SharePoint und SAP hat die Datenkonsistenz um 15 % erhöht – ein Ergebnis, das sich unmittelbar auf die Qualität von Produktstammdaten übertragen lässt. Zusätzlich verfüge ich über solide Excel‑Kenntnisse, Grundkenntnisse in HTML, XML, JSON und SQL sowie Erfahrung mit Power BI‑Reporting, wodurch ich strukturelle Datenanpassungen und funktionale Tests effizient unterstützen kann. Meine Zertifikate in Python, SQL und Workflow‑Automation untermauern meine Fähigkeit, digitale Projekte im Marketingumfeld eigenständig zu planen, zu steuern und erfolgreich abzuschließen.
+
+Ich bin hoch motiviert, meine analytische und kreative Denkweise sowie meine ausgeprägte Kommunikationsstärke in Ihr dynamisches Team einzubringen und gemeinsam die Weiterentwicklung Ihrer PIM‑ und E‑Commerce‑Lösungen voranzutreiben. Ich stehe Ihnen ab sofort bzw. zum nächstmöglichen Zeitpunkt zur Verfügung und freue mich sehr über die Gelegenheit zu einem persönlichen Vorstellungsgespräch.
+
+Mit freundlichen Grüßen,
+Tamara Steer
+tamarasteer019@gmail.com
+0160 9476 4310

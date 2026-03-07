@@ -25,6 +25,8 @@ export const BASE_RESUME: ResumeData = {
     { company: 'Bosch und Siemens Hausgeräte GmbH', role: 'Produktionsmitarbeiterin', period: '10/2006 – 10/2007', location: 'Giengen, Deutschland', bullets: ['Zusammenbau von Elektrokleinteilen sowie von Kühl- und Gefriergeräten', 'Aushelfen in verschiedenen Arbeitsbereichen'] }
   ],
   certifications: [],
+  achievements: [],
+  awards: [],
   skills: ['MS365, SAP, SharePoint, Datev, CaseWare, Ticket-Management-Systeme', 'Python (Grundkenntnisse), API-Integration, AWS Lambda, Postman, VS Code', 'SAP ERP, Grundverständnis Odoo, Prozessautomatisierung, Cloud-Sicherheit', 'Lösungsorientiert, lernbereit, kommunikativ, teamfähig']
 };
 
@@ -34,6 +36,7 @@ interface AppState {
   tailoredResume: TailoredResumeData | null;
   atsResult: ATSResult | null;
   coverLetter: string;
+  jobDescription: string;
   isEditMode: boolean;
   isTailoring: boolean;
   tailoringError: string | null;
@@ -41,6 +44,7 @@ interface AppState {
   // Jobs
   jobs: JobRow[];
   selectedJob: JobRow | null;
+  activeJobDetails: { title: string; company: string; id?: number } | null;
   isScraperRunning: boolean;
   newJobCount: number;
 
@@ -52,12 +56,14 @@ interface AppState {
   setTailoredResume: (data: TailoredResumeData | null) => void;
   setAtsResult: (result: ATSResult | null) => void;
   setCoverLetter: (text: string) => void;
+  setJobDescription: (jd: string) => void;
   setEditMode: (on: boolean) => void;
   setIsTailoring: (v: boolean) => void;
   setTailoringError: (err: string | null) => void;
   setJobs: (jobs: JobRow[]) => void;
   addNewJobs: (jobs: JobRow[]) => void;
   setSelectedJob: (job: JobRow | null) => void;
+  setActiveJobDetails: (details: { title: string; company: string; id?: number } | null) => void;
   setScraperRunning: (v: boolean) => void;
   setMode: (mode: 'manual' | 'auto') => void;
   resetToBase: () => void;
@@ -69,11 +75,13 @@ export const useAppStore = create<AppState>((set) => ({
   tailoredResume: null,
   atsResult: null,
   coverLetter: '',
+  jobDescription: '',
   isEditMode: false,
   isTailoring: false,
   tailoringError: null,
   jobs: [],
   selectedJob: null,
+  activeJobDetails: null,
   isScraperRunning: false,
   newJobCount: 0,
   mode: 'manual',
@@ -82,14 +90,16 @@ export const useAppStore = create<AppState>((set) => ({
   setTailoredResume: (data) => set({ tailoredResume: data, resumeData: data ? { ...data } : BASE_RESUME }),
   setAtsResult: (result) => set({ atsResult: result }),
   setCoverLetter: (text) => set({ coverLetter: text }),
+  setJobDescription: (jd) => set({ jobDescription: jd }),
   setEditMode: (on) => set({ isEditMode: on }),
   setIsTailoring: (v) => set({ isTailoring: v }),
   setTailoringError: (err) => set({ tailoringError: err }),
   setJobs: (jobs) => set({ jobs }),
   addNewJobs: (newJobs) => set((s) => ({ jobs: [...newJobs, ...s.jobs], newJobCount: s.newJobCount + newJobs.length })),
   setSelectedJob: (job) => set({ selectedJob: job }),
+  setActiveJobDetails: (details) => set({ activeJobDetails: details }),
   setScraperRunning: (v) => set({ isScraperRunning: v }),
   setMode: (mode) => set({ mode }),
-  resetToBase: () => set({ resumeData: BASE_RESUME, tailoredResume: null, atsResult: null, coverLetter: '' }),
+  resetToBase: () => set({ resumeData: BASE_RESUME, tailoredResume: null, atsResult: null, coverLetter: '', jobDescription: '', activeJobDetails: null }),
   resetNewJobCount: () => set({ newJobCount: 0 }),
 }));

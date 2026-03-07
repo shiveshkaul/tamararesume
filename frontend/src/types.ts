@@ -29,6 +29,8 @@ export interface ResumeData {
   education: Education[];
   certifications: Certification[];
   skills: string[];
+  achievements: string[];
+  awards: string[];
 }
 
 export interface TailoredResumeData extends ResumeData {

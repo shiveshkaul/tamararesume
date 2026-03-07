@@ -1,0 +1,38 @@
+{
+  "score": 65,
+  "matchedKeywords": [
+    "Excel",
+    "SQL",
+    "HTML",
+    "Content",
+    "Koordination",
+    "Analytisches Denken",
+    "Kommunikationsstärke"
+  ],
+  "missingKeywords": [
+    "PIM",
+    "DAM",
+    "Magento",
+    "XML",
+    "JSON",
+    "Englisch",
+    "Marketing",
+    "Digitalisierung",
+    "IT‑Projekte",
+    "E‑Commerce",
+    "Deutsch (explizit)"
+  ],
+  "suggestions": [
+    "Ergänzen Sie konkrete Erfahrung mit PIM‑, DAM‑ und Magento‑Systemen (z. B. durch Projekte, Zertifikate oder Selbststudium).",
+    "Fügen Sie Ihre Englischkenntnisse hinzu und geben Sie das Niveau (z. B. B2/C1) an.",
+    "Erwähnen Sie Kenntnisse in XML und JSON oder betonen Sie die Bereitschaft, diese schnell zu erlernen.",
+    "Heben Sie digitale Marketing‑ oder E‑Commerce‑Projekte hervor, insbesondere Ihre Rolle bei der Koordination mit externen Agenturen.",
+    "Formulieren Sie Bullet‑Points stärker im Kontext von Produktdaten‑ und Content‑Management, um die geforderten Schlüsselbegriffe zu spiegeln."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 19,
+    "experienceMatch": 18,
+    "keywordsMatch": 10
+  }
+}
