@@ -56,14 +56,14 @@ router.post('/tailor', async (req: Request, res: Response) => {
         url: jobRow?.url || '',
         appliedAt: null,
         mode: 'manual',
-        status: 'pending'
+        status: 'draft'
       }
     });
 
     // Create application record
     const appResult = db.prepare(`
       INSERT INTO applications (job_id, status, mode, tailored_resume_path, cover_letter_path, ats_score, ats_breakdown, folder_path)
-      VALUES (?, 'pending', 'manual', ?, ?, ?, ?, ?)
+      VALUES (?, 'draft', 'manual', ?, ?, ?, ?, ?)
     `).run(
       jobRow?.id || null,
       path.join(folderPath, 'tailored_resume.html'),

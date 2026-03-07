@@ -97,12 +97,22 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
         </div>
 
         {/* Ausbildung */}
-        <div style={{ background: '#c8892a', color: '#fff', padding: '6px 12px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5, margin: '20px -20px 12px', paddingLeft: 20 }}>
-          🎓 AUSBILDUNG
-        </div>
-        <div style={{ fontSize: 11, fontWeight: 700 }}>Bachelor of Science (B.Sc.) in Wirtschaftsinformatik</div>
-        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)' }}>Fernuniversität Hagen | Campusstandort Stuttgart</div>
-        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)' }}>10/2025 – heute</div>
+        {d.education && d.education.length > 0 && (
+          <>
+            <div style={{ background: '#c8892a', color: '#fff', padding: '6px 12px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5, margin: '20px -20px 12px', paddingLeft: 20 }}>
+              🎓 AUSBILDUNG
+            </div>
+            {d.education.map((edu, i) => (
+              <div key={i} style={{ marginBottom: 10 }}>
+                <div style={{ fontSize: 11, fontWeight: 700 }}>{edu.degree}</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)' }}>
+                  {edu.institution} {edu.location ? `| ${edu.location}` : ''}
+                </div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)' }}>{edu.period}</div>
+              </div>
+            ))}
+          </>
+        )}
 
         {/* Certifications */}
         {d.certifications && d.certifications.length > 0 && (
@@ -116,6 +126,20 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
                 <div style={{ fontSize: 9.5, color: 'rgba(255,255,255,0.75)' }}>{c.provider} | {c.year}</div>
               </div>
             ))}
+          </>
+        )}
+
+        {/* Ziele und Stärken */}
+        {d.goals && (
+          <>
+            <div style={{ background: '#c8892a', color: '#fff', padding: '6px 12px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5, margin: '20px -20px 12px', paddingLeft: 20 }}>
+              🎯 ZIELE UND STÄRKEN
+            </div>
+            <div {...editableProps} className={editClass} style={{ fontSize: 10.5, lineHeight: 1.6, color: 'rgba(255,255,255,0.92)' }}>
+              {d.goals.split('\n\n').map((para, i) => (
+                <p key={i} style={{ marginBottom: 8 }}>{para}</p>
+              ))}
+            </div>
           </>
         )}
 

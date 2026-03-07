@@ -3,7 +3,8 @@ import API from '../api';
 import { ApplicationRow } from '../types';
 
 const statusColors: Record<string, string> = {
-  pending: 'bg-gray-100 text-gray-600',
+  draft: 'bg-gray-100 text-gray-500',
+  pending: 'bg-orange-100 text-orange-600',
   manually_applied: 'bg-blue-100 text-blue-700',
   auto_applied: 'bg-purple-100 text-purple-700',
   rejected: 'bg-red-100 text-red-700',
@@ -66,7 +67,7 @@ export default function ApplicationTracker() {
 
       {/* Filter */}
       <div className="flex gap-2 mb-4">
-        {['', 'pending', 'manually_applied', 'interview', 'offer', 'rejected'].map(s => (
+        {['', 'draft', 'pending', 'manually_applied', 'interview', 'offer', 'rejected'].map(s => (
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
@@ -120,6 +121,7 @@ export default function ApplicationTracker() {
                     onChange={e => updateStatus(app.id, e.target.value)}
                     className="text-[10px] border border-gray-200 rounded px-1 py-0.5"
                   >
+                    <option value="draft">Draft</option>
                     <option value="pending">Pending</option>
                     <option value="manually_applied">Applied</option>
                     <option value="interview">Interview</option>

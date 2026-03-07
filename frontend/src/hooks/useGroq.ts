@@ -45,5 +45,20 @@ export function useGroq() {
     }
   }, [store]);
 
-  return { tailorResume, generateCoverLetter, loading, error };
+  const scoreBaseResume = useCallback(async (jobDescription: string, jobId?: number) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await API.post('/ats/score', { jobDescription, jobId, resumeData: store.resumeData });
+      store.setAtsResult(response.data);
+      return response.data;
+    } catch (err: any) {
+      setError(err.response?.data?.error || err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [store]);
+
+  return { tailorResume, generateCoverLetter, scoreBaseResume, loading, error };
 }

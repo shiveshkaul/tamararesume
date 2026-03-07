@@ -14,10 +14,19 @@ export interface Certification {
   year: string;
 }
 
+export interface Education {
+  degree: string;
+  institution: string;
+  period: string;
+  location: string;
+}
+
 export interface ResumeData {
   title: string;
   profileSummary: string;
+  goals: string;
   jobs: BaseJob[];
+  education: Education[];
   certifications: Certification[];
   skills: string[];
 }
