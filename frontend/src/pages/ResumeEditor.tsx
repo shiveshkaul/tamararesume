@@ -6,7 +6,7 @@ import { useAppStore } from '../store/appStore';
 import { useGroq } from '../hooks/useGroq';
 
 export default function ResumeEditor() {
-  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError } = useAppStore();
+  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError, tailoredResume } = useAppStore();
   const { tailorResume, scoreBaseResume, loading } = useGroq();
   const [jobDescription, setJobDescription] = useState('');
   const [drawerOpen, setDrawerOpen] = useState(true);
@@ -123,15 +123,28 @@ export default function ResumeEditor() {
           <CoverLetterPanel />
 
           {atsResult && (
-            <button
-              onClick={() => {
-                // Save application would POST to backend — simplified here
-                alert('Application saved! Check the Applications page.');
-              }}
-              className="w-full py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-sm"
-            >
-              💾 Save Application
-            </button>
+            tailoredResume ? (
+              <button
+                onClick={() => {
+                  alert('Application saved! Check the Applications page.');
+                }}
+                className="w-full py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition text-sm flex items-center justify-center gap-2"
+              >
+                💾 Save Application
+              </button>
+            ) : (
+              <button
+                onClick={handleTailor}
+                disabled={loading || !jobDescription.trim()}
+                className="w-full py-2 bg-brand-teal text-white font-semibold flex items-center justify-center gap-2 rounded-lg hover:bg-brand-teal/90 disabled:opacity-50 transition text-sm"
+              >
+                {loading ? (
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  '✨ Tailor Now to Improve Score'
+                )}
+              </button>
+            )
           )}
 
           <button
