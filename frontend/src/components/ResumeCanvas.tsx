@@ -48,9 +48,9 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
         <div style={{
           width: 110, height: 110, borderRadius: '50%', background: '#c8892a',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 32, fontWeight: 700, margin: '0 auto 20px', color: '#fff'
+          margin: '0 auto 20px', overflow: 'hidden'
         }}>
-          TS
+          <img src="/profile.jpeg" alt="Tamara Steer" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
         {/* Contact */}

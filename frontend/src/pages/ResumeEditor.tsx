@@ -61,8 +61,10 @@ export default function ResumeEditor() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-6 flex justify-center">
-          <ResumeCanvas scale={0.85} />
+        <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-6 flex justify-center items-start">
+          <div style={{ minWidth: 794 * 0.85, minHeight: 1123 * 0.85, flexShrink: 0 }}>
+            <ResumeCanvas scale={0.85} />
+          </div>
         </div>
       </div>
 
