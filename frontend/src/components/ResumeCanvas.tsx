@@ -21,6 +21,7 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
       id={id}
       style={{
         width: 794 * scale,
+        height: 'max-content',
         minHeight: 1123 * scale,
         transform: `scale(${scale})`,
         transformOrigin: 'top left',
@@ -35,7 +36,7 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
       }}
     >
       {/* LEFT SIDEBAR */}
-      <div style={{ width: '35%', background: '#1e5f74', color: '#fff', padding: '30px 20px' }}>
+      <div style={{ width: '35%', flexShrink: 0, display: 'flex', flexDirection: 'column', background: '#1e5f74', color: '#fff', padding: '30px 20px' }}>
         <div {...editableProps} className={editClass} style={{ fontSize: 28, fontWeight: 700, marginBottom: 4 }}>
           Tamara Steer
         </div>
@@ -136,7 +137,7 @@ export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: 
       </div>
 
       {/* RIGHT CONTENT */}
-      <div style={{ width: '65%', padding: '30px 25px', background: '#fff' }}>
+      <div style={{ flex: 1, padding: '30px 25px', background: '#fff' }}>
         <div style={{
           background: '#1e5f74', color: '#fff', padding: '8px 15px', fontSize: 12,
           fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.5,

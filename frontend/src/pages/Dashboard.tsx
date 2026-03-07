@@ -89,7 +89,7 @@ export default function Dashboard() {
                   📄 Open Legacy PDF
                 </a>
               </div>
-              <div style={{ width: 794 * 0.52 }} className="opacity-90 grayscale-[0.2]">
+              <div style={{ minWidth: 794 * 0.52, minHeight: 1123 * 0.52, flexShrink: 0 }} className="opacity-90 grayscale-[0.2]">
                 <ResumeCanvas scale={0.52} data={BASE_RESUME} id="base-resume-canvas" />
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function Dashboard() {
           
           <div className="flex flex-col gap-2 items-center">
             {tailoredResume && <span className="font-bold text-brand-teal text-sm uppercase tracking-wide">✨ Tailored Resume</span>}
-            <div style={{ width: 794 * (tailoredResume ? 0.52 : 0.75) }}>
+            <div style={{ minWidth: 794 * (tailoredResume ? 0.52 : 0.75), minHeight: 1123 * (tailoredResume ? 0.52 : 0.75), flexShrink: 0 }}>
               <ResumeCanvas scale={tailoredResume ? 0.52 : 0.75} />
             </div>
           </div>
