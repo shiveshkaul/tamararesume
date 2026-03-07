@@ -1,19 +1,24 @@
 import { useAppStore } from '../store/appStore';
 
+import { ResumeData } from '../types';
+
 interface ResumeCanvasProps {
   scale?: number;
+  data?: ResumeData;
+  id?: string;
 }
 
-export default function ResumeCanvas({ scale = 1 }: ResumeCanvasProps) {
-  const { resumeData, isEditMode } = useAppStore();
-  const d = resumeData;
+export default function ResumeCanvas({ scale = 1, data, id = 'resume-canvas' }: ResumeCanvasProps) {
+  const store = useAppStore();
+  const d = data || store.resumeData;
 
+  const isEditMode = store.isEditMode && !data;
   const editableProps = isEditMode ? { contentEditable: true, suppressContentEditableWarning: true } : {};
   const editClass = isEditMode ? 'outline outline-2 outline-blue-300/50 outline-offset-2 rounded' : '';
 
   return (
     <div
-      id="resume-canvas"
+      id={id}
       style={{
         width: 794 * scale,
         minHeight: 1123 * scale,
@@ -26,7 +31,6 @@ export default function ResumeCanvas({ scale = 1 }: ResumeCanvasProps) {
         background: '#fff',
         boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
         borderRadius: 4,
-        overflow: 'hidden',
         color: '#2c2c2c',
       }}
     >

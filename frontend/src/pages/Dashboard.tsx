@@ -4,10 +4,10 @@ import JobFeed from '../components/JobFeed';
 import ATSScorePanel from '../components/ATSScorePanel';
 import CoverLetterPanel from '../components/CoverLetterPanel';
 import ModeToggle from '../components/ModeToggle';
-import { useAppStore } from '../store/appStore';
+import { useAppStore, BASE_RESUME } from '../store/appStore';
 
 export default function Dashboard() {
-  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter } = useAppStore();
+  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume } = useAppStore();
   const [showPanel, setShowPanel] = useState(false);
 
   const handleDownloadPdf = async () => {
@@ -80,9 +80,26 @@ export default function Dashboard() {
         )}
 
         {/* Canvas container */}
-        <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-4 flex justify-center">
-          <div style={{ width: 794 * 0.68, overflow: 'hidden' }}>
-            <ResumeCanvas scale={0.68} />
+        <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-4 flex gap-8 justify-center items-start">
+          {tailoredResume && (
+            <div className="flex flex-col gap-2 items-center">
+              <div className="flex items-center justify-between w-full px-2">
+                <span className="font-bold text-gray-500 text-sm uppercase tracking-wide">Legacy Resume</span>
+                <a href="/Tamara_Steer_Lebenslauf.pdf" target="_blank" className="px-2 py-1 text-[10px] font-bold bg-white text-gray-600 border border-gray-300 rounded shadow-sm hover:bg-gray-50 transition flex items-center gap-1">
+                  📄 Open Legacy PDF
+                </a>
+              </div>
+              <div style={{ width: 794 * 0.52 }} className="opacity-90 grayscale-[0.2]">
+                <ResumeCanvas scale={0.52} data={BASE_RESUME} id="base-resume-canvas" />
+              </div>
+            </div>
+          )}
+          
+          <div className="flex flex-col gap-2 items-center">
+            {tailoredResume && <span className="font-bold text-brand-teal text-sm uppercase tracking-wide">✨ Tailored Resume</span>}
+            <div style={{ width: 794 * (tailoredResume ? 0.52 : 0.75) }}>
+              <ResumeCanvas scale={tailoredResume ? 0.52 : 0.75} />
+            </div>
           </div>
         </div>
       </div>

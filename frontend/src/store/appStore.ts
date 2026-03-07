@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { TailoredResumeData, ATSResult, JobRow, ResumeData } from '../types';
 
-const BASE_RESUME: ResumeData = {
+export const BASE_RESUME: ResumeData = {
   title: 'IT-Mitarbeiterin 1st Level Support',
   profileSummary: 'Engagierte IT-Support-Mitarbeiterin mit soliden Kenntnissen in der Betreuung und Administration von IT-Infrastrukturen und Softwarelösungen. Sicher im Umgang mit MS365, SAP ERP, Active Directory (Microsoft Entra ID) sowie cloudbasierten Anwendungen. Aktuell intensive Weiterbildung in IT-Sicherheit, Backend-Entwicklung (AWS, API-Integration) und Prozessautomatisierung. Strukturiertes und lösungsorientiertes Arbeiten, gepaart mit Teamgeist und hoher Lernbereitschaft, zeichnen meinen Arbeitsstil aus.',
   jobs: [
