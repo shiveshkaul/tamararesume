@@ -25,6 +25,8 @@ export function useJobs() {
   }, [store]);
 
   const triggerScrape = useCallback(async () => {
+    // Prevent overlapping scrapes
+    if (store.isScraperRunning) return;
     try {
       store.setScraperRunning(true);
       const res = await API.post('/jobs/scrape');
@@ -36,6 +38,25 @@ export function useJobs() {
       store.setScraperRunning(false);
     }
   }, [store, fetchJobs]);
+
+  // Auto Mode background scraper loop
+  useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+
+    if (store.mode === 'auto') {
+      // Fire an immediate scrape as soon as auto mode is turned on
+      triggerScrape();
+
+      // Then scrape every 5 minutes (300,000 ms) automatically
+      intervalId = setInterval(() => {
+        triggerScrape();
+      }, 5 * 60 * 1000);
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [store.mode, triggerScrape]);
 
   // SSE connection
   useEffect(() => {
