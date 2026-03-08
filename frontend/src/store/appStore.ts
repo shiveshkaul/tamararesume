@@ -50,6 +50,7 @@ interface AppState {
 
   // Mode
   mode: 'manual' | 'auto';
+  wfhOnly: boolean;
 
   // Actions
   setResumeData: (data: ResumeData) => void;
@@ -66,6 +67,7 @@ interface AppState {
   setActiveJobDetails: (details: { title: string; company: string; id?: number } | null) => void;
   setScraperRunning: (v: boolean) => void;
   setMode: (mode: 'manual' | 'auto') => void;
+  setWfhOnly: (on: boolean) => void;
   resetToBase: () => void;
   resetNewJobCount: () => void;
 }
@@ -85,6 +87,7 @@ export const useAppStore = create<AppState>((set) => ({
   isScraperRunning: false,
   newJobCount: 0,
   mode: 'manual',
+  wfhOnly: false,
 
   setResumeData: (data) => set({ resumeData: data }),
   setTailoredResume: (data) => set({ tailoredResume: data, resumeData: data ? { ...data } : BASE_RESUME }),
@@ -100,6 +103,16 @@ export const useAppStore = create<AppState>((set) => ({
   setActiveJobDetails: (details) => set({ activeJobDetails: details }),
   setScraperRunning: (v) => set({ isScraperRunning: v }),
   setMode: (mode) => set({ mode }),
+  setWfhOnly: (wfhOnly) => {
+    set({ wfhOnly });
+    try {
+      fetch('http://localhost:8000/api/settings/wfh_only', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ value: wfhOnly })
+      });
+    } catch { } // ignore
+  },
   resetToBase: () => set({ resumeData: BASE_RESUME, tailoredResume: null, atsResult: null, coverLetter: '', jobDescription: '', activeJobDetails: null }),
   resetNewJobCount: () => set({ newJobCount: 0 }),
 }));

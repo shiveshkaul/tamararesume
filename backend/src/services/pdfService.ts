@@ -163,3 +163,90 @@ export function buildResumeHtml(resumeData: any): string {
 </body>
 </html>`;
 }
+
+export function buildCoverLetterHtml(coverLetterText: string, jobTitle: string, company: string): string {
+  const formattedText = coverLetterText.split('\n').map(p => `<p>${p}</p>`).join('');
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 25mm 25mm;
+    margin: 0 auto;
+    background: white;
+  }
+  .header {
+    border-bottom: 2px solid #2B5C6B; /* brand-teal */
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  .name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2B5C6B;
+    margin-bottom: 5px;
+  }
+  .contact-info {
+    font-size: 11px;
+    color: #666;
+  }
+  .recipient {
+    margin-bottom: 30px;
+    font-size: 11px;
+    color: #444;
+  }
+  .date {
+    text-align: right;
+    font-size: 11px;
+    color: #444;
+    margin-bottom: 30px;
+  }
+  .subject {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .content p {
+    font-size: 11px;
+    margin-bottom: 12px;
+    text-align: justify;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="name">Tamara Steer</div>
+      <div class="contact-info">
+        Kaffeegäßle 2, 73566 Bartholomä | 016094764310 | tamarasteer019@gmail.com
+      </div>
+    </div>
+    
+    <div class="date">${new Date().toLocaleDateString('de-DE')}</div>
+    
+    <div class="recipient">
+      <strong>${company}</strong><br>
+      Personalabteilung<br>
+    </div>
+    
+    <div class="subject">Bewerbung als ${jobTitle}</div>
+    
+    <div class="content">
+      ${formattedText}
+    </div>
+  </div>
+</body>
+</html>`;
+}

@@ -14,6 +14,7 @@ import atsRouter from './routes/ats';
 import applicationsRouter from './routes/applications';
 import scraperRouter from './routes/scraper';
 import settingsRouter from './routes/settings';
+import bulkRouter from './routes/bulk';
 import { BASE_RESUME } from './types';
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/ats', atsRouter);
 app.use('/api/applications', applicationsRouter);
 app.use('/api/scraper', scraperRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/bulk', bulkRouter);
 
 // Health check
 app.get('/api/health', (_req, res) => {

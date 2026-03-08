@@ -4,6 +4,8 @@ interface Props {
   job: JobRow;
   onTailor: (job: JobRow) => void;
   onDismiss: (jobId: number) => void;
+  isSelected?: boolean;
+  onToggleSelect?: (jobId: number, selected: boolean) => void;
 }
 
 function timeAgo(dateStr: string): string {
@@ -23,12 +25,22 @@ function scoreColor(score: number | null): string {
   return 'bg-red-100 text-red-700 border-red-300';
 }
 
-export default function JobCard({ job, onTailor, onDismiss }: Props) {
+export default function JobCard({ job, onTailor, onDismiss, isSelected = false, onToggleSelect }: Props) {
   return (
-    <div className={`bg-white rounded-lg p-4 border border-gray-100 shadow-sm hover:shadow-md transition-all ${
-      job.is_new ? 'animate-slideDown border-l-4 border-l-brand-gold' : ''
-    }`}>
-      <div className="flex items-start justify-between gap-2">
+    <div className={`bg-white rounded-lg p-3 border shadow-sm hover:shadow-md transition-all ${
+      job.is_new ? 'animate-slideDown border-l-4 border-l-brand-gold' : 'border-gray-100'
+    } ${isSelected ? 'ring-2 ring-brand-teal bg-brand-teal/5' : ''}`}>
+      <div className="flex items-start gap-3">
+        {onToggleSelect && (
+          <div className="pt-1 shrink-0">
+            <input 
+              type="checkbox" 
+              checked={isSelected}
+              onChange={(e) => onToggleSelect(job.id, e.target.checked)}
+              className="w-4 h-4 text-brand-teal rounded border-gray-300 focus:ring-brand-teal cursor-pointer"
+            />
+          </div>
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             {job.is_new === 1 && (
@@ -40,9 +52,9 @@ export default function JobCard({ job, onTailor, onDismiss }: Props) {
               {job.platform}
             </span>
           </div>
-          <h3 className="text-sm font-bold text-brand-slate truncate">{job.title}</h3>
+          <p className="text-xs text-brand-slate font-bold truncate">{job.title}</p>
           <p className="text-xs text-gray-600 font-medium">{job.company}</p>
-          <p className="text-xs text-gray-400">{job.location} · {timeAgo(job.created_at)}</p>
+          <p className="text-xs text-gray-400">{job.location} · {job.posted_date || timeAgo(job.created_at)}</p>
           {job.description_short && (
             <p className="text-[10px] text-gray-400 mt-1 line-clamp-2">{job.description_short}</p>
           )}

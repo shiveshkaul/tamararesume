@@ -32,12 +32,10 @@ router.get('/', (req: Request, res: Response) => {
 
 // GET /api/jobs/stream — SSE
 router.get('/stream', (req: Request, res: Response) => {
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'Access-Control-Allow-Origin': '*'
-  });
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders();
   res.write('data: {"type":"connected"}\n\n');
   addSSEClient(res);
 });
@@ -112,5 +110,19 @@ router.post('/:id/fetch-full-description', async (req: Request, res: Response) =
   }
 });
 
-export default router;
+// POST /api/jobs/bulk-apply
+router.post('/bulk-apply', (req: Request, res: Response) => {
+  try {
+    const { jobIds } = req.body;
+    if (!Array.isArray(jobIds) || jobIds.length === 0) {
+      return res.status(400).json({ error: 'Valid jobIds array required' });
+    }
+    const placeholders = jobIds.map(() => '?').join(',');
+    db.prepare(`UPDATE jobs SET is_applied = 1 WHERE id IN (${placeholders})`).run(...jobIds);
+    res.json({ success: true, count: jobIds.length });
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+});
 
+export default router;

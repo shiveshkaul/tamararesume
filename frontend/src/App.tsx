@@ -9,7 +9,7 @@ import './index.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="flex min-h-screen bg-gray-50">
         <Sidebar />
         <main className="ml-64 flex-1 p-6 overflow-auto">

@@ -3,36 +3,30 @@ import db from '../db/schema';
 
 const router = Router();
 
-// GET /api/settings
-router.get('/', (req: Request, res: Response) => {
+router.post('/:key', (req: Request, res: Response) => {
   try {
-    const rows = db.prepare('SELECT * FROM settings').all() as any[];
-    const settings: Record<string, any> = {};
-    for (const row of rows) {
-      try {
-        settings[row.key] = JSON.parse(row.value);
-      } catch {
-        settings[row.key] = row.value;
-      }
-    }
-    res.json(settings);
+    const { key } = req.params;
+    const { value } = req.body;
+    db.prepare(`
+      INSERT INTO settings (key, value, updated_at) 
+      VALUES (?, ?, CURRENT_TIMESTAMP) 
+      ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=CURRENT_TIMESTAMP
+    `).run(key, JSON.stringify(value));
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
   }
 });
 
-// POST /api/settings
-router.post('/', (req: Request, res: Response) => {
+router.get('/:key', (req: Request, res: Response) => {
   try {
-    const updates = req.body;
-    const upsert = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)');
-
-    for (const [key, value] of Object.entries(updates)) {
-      const val = typeof value === 'string' ? value : JSON.stringify(value);
-      upsert.run(key, val);
+    const { key } = req.params;
+    const row = db.prepare('SELECT value FROM settings WHERE key = ?').get(key) as any;
+    if (row) {
+      res.json({ value: JSON.parse(row.value) });
+    } else {
+      res.json({ value: null });
     }
-
-    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
   }

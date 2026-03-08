@@ -1,16 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ResumeCanvas from '../components/ResumeCanvas';
 import CoverLetterCanvas from '../components/CoverLetterCanvas';
 import ATSScorePanel from '../components/ATSScorePanel';
 import { useAppStore } from '../store/appStore';
 import { useGroq } from '../hooks/useGroq';
+import API from '../api';
 
 export default function ResumeEditor() {
   const store = useAppStore();
-  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError, tailoredResume, jobDescription, setJobDescription, activeJobDetails } = store;
-  const { tailorResume, scoreBaseResume, pushSuggestions, loading } = useGroq();
+  const { isEditMode, setEditMode, atsResult, isTailoring, tailoringError, tailoredResume, jobDescription, setJobDescription, activeJobDetails, selectedJob } = store;
+  const { tailorResume, scoreBaseResume, pushSuggestions, loading: groqLoading } = useGroq();
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'resume' | 'coverLetter'>('resume');
+  const [isExtracting, setIsExtracting] = useState(false);
+  
+  const loading = groqLoading || isExtracting;
+
+  // Auto-extract URL text when jumping to editor with a new active job
+  useEffect(() => {
+    if (!selectedJob || !selectedJob.url) return;
+    
+    // Check if the current JD is blank or just the short snippet
+    if (!jobDescription || jobDescription === selectedJob.description_short || jobDescription === `${selectedJob.title} at ${selectedJob.company}`) {
+      const fetchFullJD = async () => {
+        setIsExtracting(true);
+        try {
+          // Set a friendly holding message
+          setJobDescription(`Extracting full job description from ${selectedJob.platform}...\nPlease wait...`);
+          
+          const res = await API.post('/scraper/extract', { url: selectedJob.url, platform: selectedJob.platform });
+          
+          if (res.data && res.data.text) {
+            setJobDescription(res.data.text);
+          } else {
+            setJobDescription('Could not auto-extract text. Please paste manually.');
+          }
+        } catch (err) {
+          setJobDescription('Failed to automatically extract text. Please copy and paste the job description manually.');
+        } finally {
+          setIsExtracting(false);
+        }
+      };
+      fetchFullJD();
+    }
+  }, [selectedJob]);
 
   const handleTailor = async () => {
     if (!jobDescription.trim()) return;
@@ -107,12 +140,14 @@ export default function ResumeEditor() {
         </div>
 
         <div className="flex-1 overflow-auto bg-gray-200/50 rounded-lg p-6 flex justify-center items-start">
-          <div style={{ minWidth: 794 * 0.85, minHeight: 1123 * 0.85, flexShrink: 0 }}>
-            {activeTab === 'resume' ? (
-              <ResumeCanvas scale={0.85} />
-            ) : (
-              <CoverLetterCanvas scale={0.85} />
-            )}
+          <div style={{ position: 'relative', width: 794 * 0.85, height: 1123 * 0.85, flexShrink: 0 }}>
+            <div style={{ position: 'absolute', top: 0, left: 0 }}>
+              {activeTab === 'resume' ? (
+                <ResumeCanvas scale={0.85} />
+              ) : (
+                <CoverLetterCanvas scale={0.85} />
+              )}
+            </div>
           </div>
         </div>
       </div>

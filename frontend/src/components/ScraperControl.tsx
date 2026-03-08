@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import API from '../api';
 import { useAppStore } from '../store/appStore';
+import ScraperRunDetailsModal from './ScraperRunDetailsModal';
 
 export default function ScraperControl() {
   const { isScraperRunning, setScraperRunning } = useAppStore();
   const [interval, setInterval_] = useState(60);
   const [runs, setRuns] = useState<any[]>([]);
   const [status, setStatus] = useState<any>(null);
+  const [selectedRun, setSelectedRun] = useState<any>(null);
 
   const fetchStatus = async () => {
     try {
@@ -89,7 +91,11 @@ export default function ScraperControl() {
             </thead>
             <tbody>
               {runs.map((r: any, i: number) => (
-                <tr key={i} className="border-t border-gray-100">
+                <tr 
+                  key={i} 
+                  onClick={() => setSelectedRun(r)}
+                  className="border-t border-gray-100 hover:bg-gray-50 cursor-pointer transition"
+                >
                   <td className="p-2">{r.started_at ? new Date(r.started_at).toLocaleString() : '—'}</td>
                   <td className="p-2">{r.platforms_scraped ? JSON.parse(r.platforms_scraped).length : 0} platforms</td>
                   <td className="p-2">{r.jobs_found || 0}</td>
@@ -110,6 +116,14 @@ export default function ScraperControl() {
           </table>
         </div>
       </div>
+
+      {/* Details Modal */}
+      {selectedRun && (
+        <ScraperRunDetailsModal 
+          run={selectedRun} 
+          onClose={() => setSelectedRun(null)} 
+        />
+      )}
     </div>
   );
 }

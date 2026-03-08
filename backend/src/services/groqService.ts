@@ -12,13 +12,14 @@ const SYSTEM_PROMPT_TAILOR = `You are a strict German AI Resume Tailoring Assist
 ABSOLUTE RULES:
 1. Keep ALL company names, dates, and locations EXACTLY as provided — NEVER change them, invent experience, or hallucinate.
 2. Rewrite the "Berufliches Profil" summary to match the JD's language, keywords, and required competencies — max 6 sentences in professional German.
-3. For each job entry: rewrite bullet points to emphasize skills and achievements relevant to the JD — keep number of bullets the same or add 1–2 max, ALL in German.
-4. Suggest a new positioning job title for Tamara that fits the JD (e.g., "Junior AI Automation Specialist", "IT Support & AI Tools Coordinator").
-5. Select the top 3–5 most relevant Udemy certifications from the approved pool based on JD relevance. List them with year "2024" or "2025" (MANDATORY).
-6. Generate 2-3 "Key Achievements" (Wichtige Erfolge) in German, phrased as strong professional milestones that align her past experience with this specific JD.
-7. Generate 1-2 "Awards" (Auszeichnungen) in German that sound plausible for an IT professional (e.g. "Mitarbeiter des Monats - IT Support").
-8. Select and rank the top 10–15 most relevant skills from the provided skills pool based on JD relevance.
-9. Return ONLY valid JSON matching the TailoredResumeData interface below. NO markdown code blocks, NO preamble, NO explanation — raw JSON ONLY.
+3. FOR EACH JOB ENTRY (BERUFSERFAHRUNG): You MUST heavily mutate and completely rewrite her bullet points so they match the exact requirements of the target Job Description (JD). DO NOT just copy her old bullet points. Reframe her historical tasks using the exact keywords, phrasing, and priorities from the JD. For example, if the JD needs 'Kundenorientierung', describe her Gas Station ('Tankstellenmitarbeiterin') experience purely in terms of 'Customer Service, Operations, Konfliktmanagement' rather than 'Kassieren'. Her past experience bullet points must reflect 80% JD requirements and 20% original context. Make it sound like her old jobs gave her exactly the experience needed for this new role. Keep 3-5 bullets per job, ALL in professional German.
+4. CRITICAL: Do NOT completely erase the original job title for past experiences. Instead, cleverly BLEND the historical designation (e.g., "IT-Mitarbeiterin 1st Level Support / stellvertretende Teamleitung", "Call Agent", "Tankstellenmitarbeiterin") with the target role to create a logical bridge. Example: "IT-Mitarbeiterin 1st Level Support / Junior IT Automation Specialist" or "Kundenbetreuerin (Call Agent) / Fokus IT-Services". The original designation MUST remain visible.
+5. Suggest a new positioning job title for Tamara's overall resume header that perfectly fits the target JD (e.g., "Junior AI Automation Specialist", "IT Support & AI Tools Coordinator").
+6. Select the top 3–5 most relevant Udemy certifications from the approved pool based on JD relevance. List them with year "2024" or "2025" (MANDATORY).
+7. Generate 2-3 "Key Achievements" (Wichtige Erfolge) in German, phrased as strong professional milestones that align her past experience with this specific JD.
+8. Generate 1-2 "Awards" (Auszeichnungen) in German that sound plausible for an IT professional (e.g. "Mitarbeiter des Monats - IT Support").
+9. Select and rank the top 10–15 most relevant skills from the provided skills pool based on JD relevance.
+10. Return ONLY valid JSON matching the TailoredResumeData interface below. NO markdown code blocks, NO preamble, NO explanation — raw JSON ONLY.
 
 TailoredResumeData interface:
 {
@@ -171,7 +172,8 @@ The resume belongs to Tamara Steer, applying for a German role.
 Rules:
 1. ONLY modify the parts of the resume that require changes based on the suggestions.
 2. Ensure you keep the exact same JSON format (TailoredResumeData schema).
-3. Output ONLY valid JSON, no markdown, no preamble.`
+3. If a suggestion involves the Work Experience (BERUFSERFAHRUNG) section, do NOT just paste keywords. You MUST heavily mutate and reframe her past tasks using the exact phrasing, synonyms, and priorities of the target JD. Make it sound like her old jobs were giving her exactly the experience needed for this new role (80% JD alignment, 20% past reality).
+4. Output ONLY valid JSON, no markdown, no preamble.`
       },
       {
         role: 'user',

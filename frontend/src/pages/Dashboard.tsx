@@ -5,9 +5,11 @@ import ATSScorePanel from '../components/ATSScorePanel';
 import CoverLetterPanel from '../components/CoverLetterPanel';
 import ModeToggle from '../components/ModeToggle';
 import { useAppStore, BASE_RESUME } from '../store/appStore';
+import { useBulk } from '../hooks/useBulk';
 
 export default function Dashboard() {
   const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails } = useAppStore();
+  const { queueStatus } = useBulk();
   const [showPanel, setShowPanel] = useState(false);
 
   const handleDownloadPdf = async () => {
@@ -47,11 +49,29 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex gap-6 h-[calc(100vh-2rem)]">
+    <div className="flex gap-6 h-[calc(100vh-2rem)] flex-col lg:flex-row relative">
+      
+      {/* 🚀 Global Queue Banner */}
+      {queueStatus?.isProcessing && (
+        <div className="absolute top-0 left-0 right-0 z-50 animate-slideDown flex justify-center mt-2 pointer-events-none">
+          <div className="bg-brand-slate/90 backdrop-blur-sm border border-brand-teal text-white shadow-2xl rounded-full px-6 py-2.5 flex items-center gap-4">
+            <div className="w-4 h-4 rounded-full border-2 border-brand-teal border-t-transparent animate-spin shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-brand-teal uppercase tracking-wider">
+                Background Queue Active ({queueStatus.queueLength} remaining)
+              </span>
+              <span className="text-[11px] text-gray-300 font-medium truncate max-w-sm">
+                {queueStatus.currentStatus}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* LEFT: Resume */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Controls bar */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 z-10">
           <div className="flex items-center gap-2">
             <ModeToggle />
           </div>
@@ -108,16 +128,20 @@ export default function Dashboard() {
                   📄 Open Legacy PDF
                 </a>
               </div>
-              <div style={{ minWidth: 794 * 0.52, minHeight: 1123 * 0.52, flexShrink: 0 }} className="opacity-90 grayscale-[0.2]">
-                <ResumeCanvas scale={0.52} data={BASE_RESUME} id="base-resume-canvas" />
+              <div style={{ position: 'relative', width: 794 * 0.52, height: 1123 * 0.52, flexShrink: 0 }} className="opacity-90 grayscale-[0.2]">
+                <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                  <ResumeCanvas scale={0.52} data={BASE_RESUME} id="base-resume-canvas" />
+                </div>
               </div>
             </div>
           )}
           
           <div className="flex flex-col gap-2 items-center">
             {tailoredResume && <span className="font-bold text-brand-teal text-sm uppercase tracking-wide">✨ Tailored Resume</span>}
-            <div style={{ minWidth: 794 * (tailoredResume ? 0.52 : 0.75), minHeight: 1123 * (tailoredResume ? 0.52 : 0.75), flexShrink: 0 }}>
-              <ResumeCanvas scale={tailoredResume ? 0.52 : 0.75} />
+            <div style={{ position: 'relative', width: 794 * (tailoredResume ? 0.52 : 0.75), height: 1123 * (tailoredResume ? 0.52 : 0.75), flexShrink: 0 }}>
+              <div style={{ position: 'absolute', top: 0, left: 0 }}>
+                <ResumeCanvas scale={tailoredResume ? 0.52 : 0.75} />
+              </div>
             </div>
           </div>
         </div>
