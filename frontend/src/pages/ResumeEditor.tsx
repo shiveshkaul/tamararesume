@@ -33,10 +33,10 @@ export default function ResumeEditor() {
           if (res.data && res.data.text) {
             setJobDescription(res.data.text);
           } else {
-            setJobDescription('Could not auto-extract text. Please paste manually.');
+            setJobDescription(`${selectedJob.title} at ${selectedJob.company}\n\n${selectedJob.description_short || 'Could not auto-extract text. Please paste manually.'}`);
           }
         } catch (err) {
-          setJobDescription('Failed to automatically extract text. Please copy and paste the job description manually.');
+          setJobDescription(`${selectedJob.title} at ${selectedJob.company}\n\n${selectedJob.description_short || 'Failed to automatically extract text. Please copy and paste the job description manually.'}`);
         } finally {
           setIsExtracting(false);
         }

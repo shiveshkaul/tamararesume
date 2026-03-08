@@ -6,10 +6,13 @@ import CoverLetterPanel from '../components/CoverLetterPanel';
 import ModeToggle from '../components/ModeToggle';
 import { useAppStore, BASE_RESUME } from '../store/appStore';
 import { useBulk } from '../hooks/useBulk';
+import { useGroq } from '../hooks/useGroq';
 
 export default function Dashboard() {
-  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails, jobDescription } = useAppStore();
+  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails, jobDescription, setJobDescription } = useAppStore();
   const { queueStatus } = useBulk();
+  const { tailorResume, scoreBaseResume, pushSuggestions, loading: groqLoading } = useGroq();
+  const loading = groqLoading;
   const [showPanel, setShowPanel] = useState(false);
 
   const handleDownloadPdf = async () => {
@@ -177,7 +180,52 @@ export default function Dashboard() {
               </div>
             )}
 
-            <ATSScorePanel atsResult={atsResult} />
+            <div>
+              <label className="text-xs font-semibold text-gray-600 block mb-1">Paste Job Description</label>
+              <textarea
+                value={jobDescription}
+                onChange={e => setJobDescription(e.target.value)}
+                rows={8}
+                placeholder="Paste the full job description here..."
+                className="w-full p-3 text-xs border border-gray-200 rounded-lg focus:outline-none focus:border-brand-teal resize-y"
+              />
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => { if (jobDescription.trim()) scoreBaseResume(jobDescription); }}
+                disabled={loading || !jobDescription.trim()}
+                className="flex-1 py-2.5 bg-brand-gold text-white font-semibold flex items-center justify-center gap-1 rounded-lg hover:bg-brand-gold/90 disabled:opacity-50 transition text-sm"
+              >
+                📊 Check Base ATS
+              </button>
+              <button
+                onClick={() => { if (jobDescription.trim()) tailorResume(jobDescription); }}
+                disabled={loading || !jobDescription.trim()}
+                className="flex-1 py-2.5 bg-brand-teal text-white font-semibold flex items-center justify-center gap-1 rounded-lg hover:bg-brand-teal/90 disabled:opacity-50 transition text-sm"
+              >
+                {loading ? (
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  '✨ Tailor Resume'
+                )}
+              </button>
+            </div>
+
+            {tailoringError && (
+              <div className="bg-red-50 border border-red-200 rounded p-2 text-xs text-red-700">❌ {tailoringError}</div>
+            )}
+
+            <ATSScorePanel
+              atsResult={atsResult}
+              onPushSuggestions={async (suggestions) => {
+                if (!jobDescription.trim()) return;
+                try {
+                  await pushSuggestions(suggestions, jobDescription);
+                } catch { /* handled by hook */ }
+              }}
+              loading={loading}
+            />
             <CoverLetterPanel />
           </div>
         ) : (

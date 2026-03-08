@@ -37,7 +37,8 @@ export default function JobFeed() {
     // Stage the job in global state, then explicitly navigate to the editor
     setSelectedJob(job);
     setActiveJobDetails({ title: job.title, company: job.company, id: job.id, url: job.url });
-    setJobDescription(''); // Force clear the old JD to guarantee the auto-extractor fires
+    // If we already have the full description, use it immediately. Otherwise clear it so the auto-extractor can try.
+    setJobDescription(job.description_full || '');
     navigate('/editor');
   }, [navigate, setSelectedJob, setActiveJobDetails, setJobDescription]);
 
