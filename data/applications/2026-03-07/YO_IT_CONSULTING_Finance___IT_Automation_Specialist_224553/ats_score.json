@@ -1,0 +1,39 @@
+{
+  "score": 84,
+  "matchedKeywords": [
+    "Finance",
+    "Financial Analysis",
+    "Reporting",
+    "SAP ERP",
+    "Power BI",
+    "SQL",
+    "Python",
+    "Automation",
+    "Data Visualization",
+    "Security",
+    "MFA",
+    "Ticketing",
+    "JIRA",
+    "ServiceNow",
+    "MS365",
+    "SharePoint"
+  ],
+  "missingKeywords": [
+    "Excel",
+    "Remote work",
+    "Data Modeling"
+  ],
+  "suggestions": [
+    "Add explicit Excel proficiency (pivot tables, advanced formulas, Power Query).",
+    "Mention any remote work experience or ability to collaborate effectively in a distributed team.",
+    "Include specific financial analysis terms such as variance analysis, budgeting, forecasting, and cost control.",
+    "Highlight soft‑skill competencies like stakeholder communication, presentation of financial insights, and cross‑functional collaboration.",
+    "Consider adding finance‑focused certifications (e.g., CFA, CPA, or relevant accounting courses) to strengthen credibility."
+  ],
+  "breakdown": {
+    "titleMatch": 16,
+    "skillsMatch": 24,
+    "experienceMatch": 26,
+    "keywordsMatch": 18
+  }
+}

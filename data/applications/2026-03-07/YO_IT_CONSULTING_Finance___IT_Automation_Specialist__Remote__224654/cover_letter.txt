@@ -1,0 +1,12 @@
+Sehr geehrte Damen und Herren,
+
+die ausgeschriebene Position des Finance Expert bei YO IT CONSULTING begeistert mich besonders, weil sie die ideale Verbindung von Finanzfachwissen und moderner IT‑Automation in einem rein remote‑basierten Umfeld bietet. Meine langjährige Erfahrung im Support von Finanzsystemen wie SAP ERP und Datev, kombiniert mit einer Leidenschaft für die Optimierung von Reporting‑ und Datenprozessen, passt exakt zu Ihrem Anspruch, Kunden durch innovative, digitale Lösungen Mehrwert zu verschaffen. Die Möglichkeit, in einem agilen Consulting‑Team zu arbeiten und dabei meine Kenntnisse in Python‑Skripting, n8n‑Workflows und Power BI einzubringen, entspricht meiner beruflichen Vision, Finanzprozesse nachhaltig zu transformieren.
+
+In meiner aktuellen Tätigkeit bei Xentasystems GmbH leite ich den 1st‑Level‑Support für ein internationales Anwaltsunternehmen und bin verantwortlich für die Verwaltung und Automatisierung von Finanz‑ und Abrechnungsdaten. Dort entwickelte ich Python‑Skripte zur automatisierten Datenextraktion aus SAP und Datev, die das monatliche Reporting um 40 % beschleunigten, und implementierte Power BI‑Dashboards für datenbasierte Entscheidungen. Zusätzlich habe ich die MFA‑ und PIM‑Einführung über Microsoft Entra ID (ehem. Azure AD) umgesetzt, wodurch sicherheitsrelevante Vorfälle im Finanzbereich vollständig eliminiert wurden. Meine Zertifikate in SQL, Power BI, Python und n8n (Udemy, 2024) sowie meine tägliche Arbeit mit MS365, SharePoint und Ticket‑Systemen (JIRA/ServiceNow) sichern eine sofortige Einsatzfähigkeit im von Ihnen beschriebenen Umfeld.  
+
+Ich bin hoch motiviert, meine analytischen Fähigkeiten und meine Erfahrung in der Finanz‑IT‑Automatisierung in die Projekte von YO IT CONSULTING einzubringen und gemeinsam mit Ihrem Team innovative Lösungen zu realisieren. Ich kann ab sofort beginnen und freue mich sehr auf die Gelegenheit, Sie in einem persönlichen Gespräch von meinem Beitrag zu Ihrem Unternehmen zu überzeugen.
+
+Mit freundlichen Grüßen,
+Tamara Steer
+tamarasteer019@gmail.com
+016094764310

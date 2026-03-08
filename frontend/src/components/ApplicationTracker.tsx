@@ -18,7 +18,7 @@ export default function ApplicationTracker() {
   const [apps, setApps] = useState<ApplicationRow[]>([]);
   const [total, setTotal] = useState(0);
   const [statusFilter, setStatusFilter] = useState('');
-  
+
   const navigate = useNavigate();
   const store = useAppStore();
 
@@ -55,8 +55,8 @@ export default function ApplicationTracker() {
       const res = await API.get(`/resume/${app.id}`);
       store.setTailoredResume(res.data.resumeData);
       store.setCoverLetter(res.data.coverLetter);
-      store.setActiveJobDetails({ title: app.job_title || 'Unknown Role', company: app.job_company || 'Unknown Company', id: app.job_id });
-      
+      store.setActiveJobDetails({ title: app.job_title || 'Unknown Role', company: app.job_company || 'Unknown Company', id: app.job_id, url: app.job_url });
+
       if (res.data.jobDescription) {
         store.setJobDescription(res.data.jobDescription);
       } else {
@@ -68,7 +68,7 @@ export default function ApplicationTracker() {
       } else {
         store.setAtsResult(null);
       }
-      
+
       navigate('/editor');
     } catch (err) {
       console.error('Failed to load application data:', err);
@@ -113,9 +113,8 @@ export default function ApplicationTracker() {
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
-            className={`px-3 py-1 text-xs rounded-full transition ${
-              statusFilter === s ? 'bg-brand-teal text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-            }`}
+            className={`px-3 py-1 text-xs rounded-full transition ${statusFilter === s ? 'bg-brand-teal text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+              }`}
           >
             {s || 'All'}
           </button>
@@ -145,11 +144,10 @@ export default function ApplicationTracker() {
                 <td className="p-3 capitalize">{app.job_platform || 'manual'}</td>
                 <td className="p-3">
                   {app.ats_score != null && (
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                      app.ats_score >= 80 ? 'bg-green-100 text-green-700' :
-                      app.ats_score >= 60 ? 'bg-yellow-100 text-yellow-700' :
-                      'bg-red-100 text-red-700'
-                    }`}>{app.ats_score}%</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${app.ats_score >= 80 ? 'bg-green-100 text-green-700' :
+                        app.ats_score >= 60 ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-red-100 text-red-700'
+                      }`}>{app.ats_score}%</span>
                   )}
                 </td>
                 <td className="p-3">

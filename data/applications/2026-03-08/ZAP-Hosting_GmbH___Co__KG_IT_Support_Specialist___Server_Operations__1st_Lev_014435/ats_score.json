@@ -1,0 +1,33 @@
+{
+  "score": 93,
+  "matchedKeywords": [
+    "1st-Level",
+    "Support",
+    "English",
+    "Linux",
+    "Windows",
+    "Ticket",
+    "Documentation",
+    "Remote",
+    "Team",
+    "Server",
+    "Problem solving"
+  ],
+  "missingKeywords": [
+    "Hosting",
+    "ZAP-Hosting"
+  ],
+  "suggestions": [
+    "Add a brief line about experience with hosting platforms or familiarity with ZAP-Hosting's customer panel.",
+    "Include the keyword \"Hosting\" (and optionally \"Game server\") to directly match the company's core business.",
+    "Highlight specific problem‑solving methods or tools (e.g., SSH, cPanel, virtualization) used in server support.",
+    "Provide quantitative metrics for server‑related ticket resolution times or customer satisfaction.",
+    "Mention cloud or virtualization experience (e.g., AWS, Docker) in the context of hosting services."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 30,
+    "experienceMatch": 27,
+    "keywordsMatch": 18
+  }
+}

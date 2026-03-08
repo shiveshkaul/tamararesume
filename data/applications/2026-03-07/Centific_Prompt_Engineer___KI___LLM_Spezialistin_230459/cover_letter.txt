@@ -1,0 +1,12 @@
+Sehr geehrte Frau C.,  
+
+die Möglichkeit, bei Centific als Prompt Engineer klinische Prompt‑Templates zu entwickeln und zu optimieren, begeistert mich besonders, weil Ihr Unternehmen an der Schnittstelle von hochmodernen LLM‑Technologien und praxisrelevanter klinischer Dokumentation arbeitet. Die Vision, durch systematisches Prompt‑Design und automatisierte Evaluationsprozesse die Qualität und Effizienz medizinischer Texte zu steigern, entspricht exakt meinem beruflichen Fokus und meiner Leidenschaft für KI‑gestützte Lösungen im Gesundheitswesen.  
+
+In meiner aktuellen Position bei Xentasystems GmbH habe ich über 30 klinische Prompt‑Vorlagen erstellt, die die Dokumentationsgenauigkeit um 18 % verbesserten und die Durchlaufzeit um 25 % verkürzten. Dabei habe ich Python‑ und Linux‑Skripte entwickelt, um A/B‑Tests zu automatisieren und monatlich mehr als 1.200 Datensätze zu analysieren. Der gesamte Prompt‑Release‑Prozess wurde von mir mittels Git und Azure DevOps von einer Bereitstellungszeit von zwei Wochen auf drei Tage reduziert – ein Ergebnis, das die in Ihrer Ausschreibung geforderten Engineering‑Workflows exakt widerspiegelt. Zusätzlich verfüge ich über fundierte Erfahrung im Umgang mit JIRA/ADO‑Work‑Items, der Definition von Evaluationskriterien sowie der Analyse von Failure‑Modes. Meine Zertifizierungen in „ChatGPT & LLM Prompt Engineering“, „Artificial Intelligence A‑Z“ und „Linux Command Line Basics“ untermauern meine technische Expertise. Durch meine Tätigkeit im internationalen 1st‑Level‑Support habe ich klare Kommunikations‑ und Kollaborationsfähigkeiten in englisch‑ und deutschsprachigen Teams bewiesen und bin zudem fließend in Französisch, was den multilinguellen Anforderungen von Centific entspricht.  
+
+Ich bin hoch motiviert, meine Erfahrung in Prompt Engineering und meine analytischen Fähigkeiten in Ihr innovatives Team einzubringen und gemeinsam die nächste Generation klinischer KI‑Lösungen zu realisieren. Ich kann die Tätigkeit ab sofort aufnehmen und freue mich sehr über die Gelegenheit, Sie in einem persönlichen Gespräch von meinem Beitrag zu Ihrem Erfolg zu überzeugen.  
+
+Mit freundlichen Grüßen,  
+Tamara Steer  
+tamarasteer019@gmail.com  
+0160 9476 4310

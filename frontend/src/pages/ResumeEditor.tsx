@@ -13,13 +13,13 @@ export default function ResumeEditor() {
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'resume' | 'coverLetter'>('resume');
   const [isExtracting, setIsExtracting] = useState(false);
-  
+
   const loading = groqLoading || isExtracting;
 
   // Auto-extract URL text when jumping to editor with a new active job
   useEffect(() => {
     if (!selectedJob || !selectedJob.url) return;
-    
+
     // Check if the current JD is blank or just the short snippet
     if (!jobDescription || jobDescription === selectedJob.description_short || jobDescription === `${selectedJob.title} at ${selectedJob.company}`) {
       const fetchFullJD = async () => {
@@ -27,9 +27,9 @@ export default function ResumeEditor() {
         try {
           // Set a friendly holding message
           setJobDescription(`Extracting full job description from ${selectedJob.platform}...\nPlease wait...`);
-          
+
           const res = await API.post('/scraper/extract', { url: selectedJob.url, platform: selectedJob.platform });
-          
+
           if (res.data && res.data.text) {
             setJobDescription(res.data.text);
           } else {
@@ -65,17 +65,17 @@ export default function ResumeEditor() {
     if (!element) return;
     try {
       const { default: API } = await import('../api');
-      
+
       const clone = element.cloneNode(true) as HTMLElement;
       clone.style.transform = 'none';
       clone.style.boxShadow = 'none';
-      
-      const response = await API.post('/resume/generate-pdf', { 
-        htmlBody: clone.outerHTML 
-      }, { 
-        responseType: 'blob' 
+
+      const response = await API.post('/resume/generate-pdf', {
+        htmlBody: clone.outerHTML
+      }, {
+        responseType: 'blob'
       });
-      
+
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -102,7 +102,7 @@ export default function ResumeEditor() {
       <div className="flex-1 flex flex-col">
         <div className="flex items-center gap-2 mb-3">
           <h1 className="text-lg font-bold text-brand-teal mr-4">Resume Editor</h1>
-          
+
           <div className="flex bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setActiveTab('resume')}
@@ -165,6 +165,20 @@ export default function ResumeEditor() {
               <p className="text-[10px] uppercase font-bold text-brand-teal mb-1">Target Role Recognized</p>
               <h3 className="text-sm font-bold text-brand-slate leading-tight">{activeJobDetails.title}</h3>
               <p className="text-xs text-gray-600 font-medium">{activeJobDetails.company}</p>
+              {(() => {
+                const url = selectedJob?.url || activeJobDetails.url || (jobDescription.match(/https?:\/\/[^\s]+/) || [])[0];
+                if (!url) return null;
+                return (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-brand-teal hover:underline flex items-center gap-1 mt-2"
+                  >
+                    🔗 Open Job URL
+                  </a>
+                );
+              })()}
             </div>
           )}
 
@@ -204,8 +218,8 @@ export default function ResumeEditor() {
             <div className="bg-red-50 border border-red-200 rounded p-2 text-xs text-red-700">❌ {tailoringError}</div>
           )}
 
-          <ATSScorePanel 
-            atsResult={atsResult} 
+          <ATSScorePanel
+            atsResult={atsResult}
             onPushSuggestions={async (suggestions) => {
               if (!jobDescription.trim()) return;
               try {

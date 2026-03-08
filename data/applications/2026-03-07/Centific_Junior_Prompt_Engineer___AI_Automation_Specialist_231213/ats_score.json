@@ -1,0 +1,41 @@
+{
+  "score": 86,
+  "matchedKeywords": [
+    "Prompt",
+    "LLM",
+    "Python",
+    "Linux",
+    "Git",
+    "Azure DevOps",
+    "A/B testing",
+    "release management",
+    "PR workflows",
+    "analytical skills",
+    "communication",
+    "English",
+    "German",
+    "French (basic)",
+    "clinical documentation",
+    "failure mode analysis",
+    "cross‑functional collaboration"
+  ],
+  "missingKeywords": [
+    "Dutch language fluency",
+    "batch evaluations",
+    "large‑scale data processing scripts",
+    "explicit clinical workflow experience beyond template creation"
+  ],
+  "suggestions": [
+    "Add a bullet point that details direct work with clinical documentation workflows or healthcare data to demonstrate domain expertise.",
+    "Clarify the level of French proficiency (e.g., B2/C1) or obtain a short certification to meet the language requirement.",
+    "Include explicit references to batch evaluation or data‑processing scripts you have built for prompt experiments.",
+    "Expand on Azure DevOps experience by describing work‑item tracking, bug management, and PR review processes you handled.",
+    "Mention how you define evaluation criteria and prioritize fixes, citing specific metrics or examples."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 27,
+    "experienceMatch": 24,
+    "keywordsMatch": 17
+  }
+}

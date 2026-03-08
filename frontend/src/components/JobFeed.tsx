@@ -36,7 +36,7 @@ export default function JobFeed() {
   const handleTailor = useCallback((job: JobRow) => {
     // Stage the job in global state, then explicitly navigate to the editor
     setSelectedJob(job);
-    setActiveJobDetails({ title: job.title, company: job.company, id: job.id });
+    setActiveJobDetails({ title: job.title, company: job.company, id: job.id, url: job.url });
     setJobDescription(''); // Force clear the old JD to guarantee the auto-extractor fires
     navigate('/editor');
   }, [navigate, setSelectedJob, setActiveJobDetails, setJobDescription]);
@@ -73,9 +73,9 @@ export default function JobFeed() {
     .filter(j => {
       const matchSearch = !search || j.title.toLowerCase().includes(search.toLowerCase()) || j.company.toLowerCase().includes(search.toLowerCase());
       const matchPlatform = !platformFilter || j.platform === platformFilter;
-      const matchStatus = statusFilter === 'All' || 
-                          (statusFilter === 'New Only' && j.is_new === 1) ||
-                          (statusFilter === 'Under24h' && isUnder24Hours(j.posted_date));
+      const matchStatus = statusFilter === 'All' ||
+        (statusFilter === 'New Only' && j.is_new === 1) ||
+        (statusFilter === 'Under24h' && isUnder24Hours(j.posted_date));
       return matchSearch && matchPlatform && matchStatus;
     })
     .sort((a, b) => {
@@ -166,8 +166,8 @@ export default function JobFeed() {
           <>
             <div className="flex justify-between items-center mb-2 px-1">
               <label className="flex items-center gap-2 cursor-pointer text-xs text-gray-500 hover:text-gray-800">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   checked={filtered.length > 0 && selectedJobs.size === filtered.length}
                   onChange={(e) => {
                     if (e.target.checked) {
@@ -199,8 +199,8 @@ export default function JobFeed() {
       {selectedJobs.size > 0 && (
         <div className="fixed bottom-6 right-6 lg:right-1/2 lg:translate-x-[calc(50%+200px)] bg-brand-slate text-white pl-6 pr-2 py-2 rounded-full shadow-2xl flex items-center gap-4 z-50 animate-slideUp border border-gray-700">
           <span className="font-bold text-sm">{selectedJobs.size} Selected</span>
-          
-          <button 
+
+          <button
             onClick={() => {
               startBulkTailoring(Array.from(selectedJobs));
               setSelectedJobs(new Set());
@@ -212,7 +212,7 @@ export default function JobFeed() {
             {queueStatus?.isProcessing ? '⏳ Queue Running...' : '✨ Bulk Tailor'}
           </button>
 
-          <button 
+          <button
             onClick={handleBulkApply}
             className="bg-brand-gold hover:bg-brand-gold/90 text-brand-slate px-4 py-2 rounded-full font-bold text-sm transition flex items-center gap-2 shadow-sm"
           >

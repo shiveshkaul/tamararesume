@@ -8,7 +8,7 @@ import { useAppStore, BASE_RESUME } from '../store/appStore';
 import { useBulk } from '../hooks/useBulk';
 
 export default function Dashboard() {
-  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails } = useAppStore();
+  const { isEditMode, setEditMode, isTailoring, tailoringError, atsResult, mode, coverLetter, tailoredResume, activeJobDetails, jobDescription } = useAppStore();
   const { queueStatus } = useBulk();
   const [showPanel, setShowPanel] = useState(false);
 
@@ -17,17 +17,17 @@ export default function Dashboard() {
     if (!element) return;
     try {
       const { default: API } = await import('../api');
-      
+
       const clone = element.cloneNode(true) as HTMLElement;
       clone.style.transform = 'none';
       clone.style.boxShadow = 'none';
-      
-      const response = await API.post('/resume/generate-pdf', { 
-        htmlBody: clone.outerHTML 
-      }, { 
-        responseType: 'blob' 
+
+      const response = await API.post('/resume/generate-pdf', {
+        htmlBody: clone.outerHTML
+      }, {
+        responseType: 'blob'
       });
-      
+
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -50,7 +50,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex gap-6 h-[calc(100vh-2rem)] flex-col lg:flex-row relative">
-      
+
       {/* 🚀 Global Queue Banner */}
       {queueStatus?.isProcessing && (
         <div className="absolute top-0 left-0 right-0 z-50 animate-slideDown flex justify-center mt-2 pointer-events-none">
@@ -78,9 +78,8 @@ export default function Dashboard() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setEditMode(!isEditMode)}
-              className={`px-3 py-1.5 text-xs font-semibold rounded transition ${
-                isEditMode ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+              className={`px-3 py-1.5 text-xs font-semibold rounded transition ${isEditMode ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
             >
               ✏️ Edit Mode
             </button>
@@ -135,7 +134,7 @@ export default function Dashboard() {
               </div>
             </div>
           )}
-          
+
           <div className="flex flex-col gap-2 items-center">
             {tailoredResume && <span className="font-bold text-brand-teal text-sm uppercase tracking-wide">✨ Tailored Resume</span>}
             <div style={{ position: 'relative', width: 794 * (tailoredResume ? 0.52 : 0.75), height: 1123 * (tailoredResume ? 0.52 : 0.75), flexShrink: 0 }}>
@@ -155,6 +154,29 @@ export default function Dashboard() {
               <h2 className="font-bold text-brand-teal">AI Tailor Panel</h2>
               <button onClick={() => setShowPanel(false)} className="text-gray-400 hover:text-gray-600 text-sm">✕ Close</button>
             </div>
+
+            {activeJobDetails && (
+              <div className="bg-brand-teal/5 border border-brand-teal/20 rounded-lg p-3">
+                <p className="text-[10px] uppercase font-bold text-brand-teal mb-1">Target Role Recognized</p>
+                <h3 className="text-sm font-bold text-brand-slate leading-tight">{activeJobDetails.title}</h3>
+                <p className="text-xs text-gray-600 font-medium">{activeJobDetails.company}</p>
+                {(() => {
+                  const url = activeJobDetails.url || (jobDescription?.match(/https?:\/\/[^\s]+/) || [])[0];
+                  if (!url) return null;
+                  return (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-brand-teal hover:underline flex items-center gap-1 mt-2"
+                    >
+                      🔗 Open Job URL
+                    </a>
+                  );
+                })()}
+              </div>
+            )}
+
             <ATSScorePanel atsResult={atsResult} />
             <CoverLetterPanel />
           </div>

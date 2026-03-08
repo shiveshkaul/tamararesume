@@ -1,0 +1,12 @@
+Sehr geehrte Frau C.,  
+
+die Möglichkeit, als Prompt Engineer bei Centific klinische Prompt‑Templates zu designen und zu optimieren, fasziniert mich besonders, weil ich meine bisherige Erfahrung im Prompt Engineering mit meiner Leidenschaft für medizinische Dokumentationsprozesse gezielt einbringen kann. Die Aussicht, in einem interdisziplinären Umfeld mit führenden KI‑Forscher*innen zusammenzuarbeiten und die Qualität klinischer Texte durch systematische Experimente zu steigern, entspricht exakt meinem beruflichen Ziel, innovative AI‑Lösungen im Gesundheitswesen zu realisieren.  
+
+In meiner derzeitigen Position bei Xentasystems GmbH entwickle ich Python‑Skripte zur automatisierten Analyse und Kategorisierung von Support‑Tickets, was die Bearbeitungszeit um 30 % reduzierte. Parallel erstelle und pflege ich Prompt‑Templates für interne KI‑Tools, führe A/B‑Tests durch und wertete die Ergebnisse aus, wodurch die Dokumentationsgenauigkeit um 20 % gesteigert wurde. Ich versioniere sämtliche Prompt‑ und Konfigurationsdateien in Git und integriere sie in Azure DevOps Pipelines, wodurch Release‑Zeiten um 40 % verkürzt wurden. Meine Zertifikate in „ChatGPT & LLM Prompt Engineering“, „Linux Command Line Basics“ und „Microsoft Azure Fundamentals“ belegen meine fundierten Kenntnisse in LLM‑Prompt‑Design, Linux‑Umgebungen und Azure DevOps. Darüber hinaus habe ich Erfahrung mit JIRA/ServiceNow für Work‑Item‑Tracking und kann analytisch fundierte Evaluationen durchführen, um Fehlermodi zu identifizieren und priorisierte Verbesserungen zu implementieren. Meine fließenden Sprachkenntnisse in Deutsch, Englisch und Grundkenntnisse in Französisch ermöglichen eine klare Kommunikation mit internationalen Teams und Kunden.  
+
+Ich bin hochmotiviert, meine Expertise bei Centific einzubringen und gemeinsam die nächste Generation klinischer Dokumentations‑LLMs zu entwickeln. Ich kann ab sofort beginnen und freue mich auf die Gelegenheit, meine Qualifikationen in einem persönlichen Gespräch näher zu erläutern.  
+
+Mit freundlichen Grüßen,  
+Tamara Steer  
+tamarasteer019@gmail.com  
+016094764310

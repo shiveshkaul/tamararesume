@@ -44,7 +44,7 @@ interface AppState {
   // Jobs
   jobs: JobRow[];
   selectedJob: JobRow | null;
-  activeJobDetails: { title: string; company: string; id?: number } | null;
+  activeJobDetails: { title: string; company: string; id?: number; url?: string } | null;
   isScraperRunning: boolean;
   newJobCount: number;
 
@@ -64,7 +64,7 @@ interface AppState {
   setJobs: (jobs: JobRow[]) => void;
   addNewJobs: (jobs: JobRow[]) => void;
   setSelectedJob: (job: JobRow | null) => void;
-  setActiveJobDetails: (details: { title: string; company: string; id?: number } | null) => void;
+  setActiveJobDetails: (details: { title: string; company: string; id?: number; url?: string } | null) => void;
   setScraperRunning: (v: boolean) => void;
   setMode: (mode: 'manual' | 'auto') => void;
   setWfhOnly: (on: boolean) => void;

@@ -1,0 +1,126 @@
+Prompt Engineer
+Centific  Deutschland
+Vor 5 Tagen  148 Bewerbungen
+
+Sehen Sie, wen Centific für diese Position eingestellt hat
+
+Bewerben
+Speichern
+Ihre Eignung mit KI bewerten
+
+Nutzen Sie KI-gestützte Empfehlungen für diesen Job und weitere exklusive Funktionen.
+
+Bin ich für diesen Job gut geeignet?
+Meinen Lebenslauf anpassen
+
+Den Jobinserenten von Centific direkt kontaktieren
+
+Hazel C.
+Hazel C.
+AI Recruiter / Recruitment Specialist @ Centific | Talent Acquisition, Team Collaboration
+
+Applied Research Scientist – Clinical Documentation Prompt Engineer
+
+This role is Temporary until end of June with possible renovation until December 2027 or longer.
+
+Roles and Responsibilities
+
+Design and optimize clinical prompt templates to produce consistent, specialty appropriate clinical documentation from transcripts.
+Run prompt experiments and evaluations (e.g., A/B comparisons, targeted worksets), analyze failure modes, and translate findings into prompt improvements and release-ready configurations.
+Operationalize prompt updates through Git and Azure DevOps (ADO): manage work items/bugs, participate in PR workflows, and maintain prompt/config artifacts used in releases.
+Incorporate feedback from customers and internal customerfacing teams into an iterative rollout plan spanning multiple specialties, with clear monitoring and follow-up.
+Build and maintain Linux/Python research scripts to run inlab experiments, batch evaluations, and data processing to support prompt development.
+
+Qualifications
+
+Experience developing and refining LLM prompts (instruction design, templates, fewshot patterns, and systematic iteration), ideally for semi-structured clinical text generation.
+Proficiency in Python and Linux for building scripts/pipelines to run experiments and evaluations.
+Experience working with version control and engineering workflows (e.g., GitHub) and ADO for work tracking, PRs, and release coordination.
+Strong analytical skills: ability to define evaluation criteria, review outputs, and prioritize fixes based on impact and risk.
+Experience with clinical documentation workflows and data.
+Clear communication and cross-functional collaboration skills.
+Language fluency in English and French, German, or Dutch.
+
+In compliance with the General Disability Law, the submission of the corresponding disability certificate will be valued.
+
+About Centific
+
+Centific expertly engineers platforms and curates multimodal, multilingual data to empower the ‘Magnificent Seven’ and enterprise clients with safe, scalable Artificial Intelligence(AI) deployment. Our team includes over 150 PhDs and data scientists, along with more than 4,000 AI practitioners and engineers. We leverage an integrated ecosystem comprised of industry-leading partnerships, and 1.8 million vertical domain experts across 230 locales, to create high-quality pre-trained datasets, fine-tuned industry-specific Large Language Models(LLMs), and Retrieval-Augmented Generation (RAG) pipelines supported by vector databases. Our innovations can reduce Generative Artificial Intelligence(Gen AI) costs by up to 80% and bring Gen AI solutions to market 50% faster.
+
+Our mission is to bridge the gap between AI creators and industry leaders by bringing best practices in Generative AI to unicorn innovators and enterprise customers. We aim to help these organizations unlock significant business value by leveraging Generative AI at scale, ensuring they stay at the forefront of technological advancement and maintain a competitive edge in their respective markets.
+
+Applying to this job implies your agreement with: In compliance with the applicable data protection regulations (General Data Protection Regulation 679/2016), we at Centific, as data Controllers, inform you that the data collected will be processed to manage your application in the selection process. This processing is legitimized by the consent given upon submitting your application, and the data will be retained for a maximum of two years. You may exercise your rights of access, rectification, deletion, opposition, restriction of processing, and data portability by contacting gdpr@centific.com Furthermore, if deemed necessary, you may file a complaint with the relevant supervisory authority.
+
+Your Authentic Self at Centific
+
+Centific is committed to creating a diverse environment and is proud to be an equal-opportunity employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, gender, gender identity or expression, sexual orientation, national origin, genetics, pregnancy, disability, age, veteran status, or other characteristics. Centific is also committed to compliance with all fair employment practices regarding citizenship and immigration status.
+
+Show more 
+Karrierestufe
+Management
+Beschäftigungsverhältnis
+Vollzeit
+Tätigkeitsbereich
+IT und Forschung
+Branchen
+Softwareentwicklung
+
+Mit einer Empfehlung lassen sich Ihre Chancen auf ein Vorstellungsgespräch bei Centific verdoppeln.
+
+Wen kennen Sie bereits?
+
+Lassen Sie sich über neue Jobs im Bereich Prompt-Engineer in Deutschland informieren.
+
+Einloggen, um Jobbenachrichtigung zu erstellen
+Ähnliche Jobs
+Prompt Engineer (m/w/d) - Schwerpunkt Voice AI
+Prompt Engineer (m/w/d) - Schwerpunkt Voice AI
+onpreo
+Deutschland
+Vor 2 Wochen
+Founding Solution Engineer
+Founding Solution Engineer
+Impala Search
+Deutschland
+Vor 5 Tagen
+Ebenfalls angesehen
+DevOps/Platform Expert (m/w/d) - AI & Agentic Systems
+DevOps/Platform Expert (m/w/d) - AI & Agentic Systems
+
+Cloudiax
+
+Deutschland
+Vor 3 Tagen
+Engineering Manager
+Engineering Manager
+
+Rasa
+
+Deutschland
+Vor 3 Wochen
+Ähnliche Suchen
+Fachkraft-Jobs
+23.966 freie Stellen
+Historiker-Jobs
+841 freie Stellen
+Englisch-Jobs
+75.722 freie Stellen
+Finanzberater-Jobs
+2.901 freie Stellen
+Unternehmensberater-Jobs
+5.891 freie Stellen
+IT-Leiter-Jobs
+810 freie Stellen
+Autor-Jobs
+493 freie Stellen
+Analyst-Jobs
+54.870 freie Stellen
+Bibliothekar-Jobs
+887 freie Stellen
+Maler-Jobs
+4.310 freie Stellen
+Chemie-Jobs
+12.710 freie Stellen
+Java-Entwickler-Jobs
+7.284 freie Stellen
+Mehr anzeigen

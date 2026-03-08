@@ -1,0 +1,38 @@
+{
+  "score": 87,
+  "matchedKeywords": [
+    "Prompt Engineering",
+    "LLM",
+    "Clinical documentation",
+    "Python",
+    "Linux",
+    "Git",
+    "Azure DevOps",
+    "A/B testing",
+    "Evaluation",
+    "Analytical skills",
+    "Collaboration",
+    "Communication",
+    "German"
+  ],
+  "missingKeywords": [
+    "French",
+    "Dutch",
+    "PR workflows",
+    "Release coordination",
+    "Customer feedback integration"
+  ],
+  "suggestions": [
+    "Add an explicit line about experience with PR (pull‑request) workflows in GitHub/Azure DevOps.",
+    "State language proficiency in English and any knowledge of French or Dutch.",
+    "Highlight direct work with clinical documentation processes and domain‑specific data.",
+    "Include keywords such as \"release management\" and \"customer feedback integration\" to mirror the JD.",
+    "Quantify the impact of your A/B testing and evaluation work with concrete metrics."
+  ],
+  "breakdown": {
+    "titleMatch": 18,
+    "skillsMatch": 27,
+    "experienceMatch": 26,
+    "keywordsMatch": 16
+  }
+}
